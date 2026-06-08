@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v0.1.0
 milestone_name: milestone
 status: executing
-last_updated: "2026-06-08T15:00:00.000Z"
+last_updated: "2026-06-08T16:00:00.000Z"
 progress:
   total_phases: 4
   completed_phases: 0
   total_plans: 6
-  completed_plans: 2
-  percent: 33
+  completed_plans: 3
+  percent: 50
 ---
 
 # STATE: agentkit
@@ -31,12 +31,12 @@ _Last updated: 2026-06-08_
 Phase: 01 (foundation) — EXECUTING
 Plan: 1 of 6
 **Phase:** 1 — Foundation
-**Plan:** 2 complete (01-02), starting 01-03
+**Plan:** 3 complete (01-03), starting 01-04
 **Status:** Executing Phase 01
-**Progress:** [███░░░░░░░] 33%
+**Progress:** [█████░░░░░] 50%
 
 ```
-Phase 1: Foundation          [███░░░░░░░] 33%
+Phase 1: Foundation          [█████░░░░░] 50%
 Phase 2: Multi-Assistant     [----------]  0%
 Phase 3: Bundled Skills      [----------]  0%
 Phase 4: Distribution        [----------]  0%
@@ -49,9 +49,9 @@ Phase 4: Distribution        [----------]  0%
 | Metric | Value |
 |--------|-------|
 | Phases complete | 0 / 4 |
-| Plans complete | 2 / 6 |
+| Plans complete | 3 / 6 |
 | Requirements mapped | 41 / 41 |
-| Requirements validated | 2 / 41 (CLI-01, CLI-02) |
+| Requirements validated | 11 / 41 (CLI-01, CLI-02, AST-01, MCP-01, MCP-03, MCP-05, MCP-06, MCP-07, SKL-01, SKL-02, SKL-03) |
 
 ---
 
@@ -65,6 +65,9 @@ Phase 4: Distribution        [----------]  0%
 | Registry ID sanitized to [a-zA-Z0-9_-] before filesystem use | Prevents path traversal via malicious registry IDs (T-02-05) | Confirmed |
 | Test-mode timeout detection disables retries | responseTimeout < 1s signals test mode; avoids retry multiplication in unit tests | Confirmed |
 | User scope only (v1) | Covers majority use case; project scope adds complexity | Pending |
+| InstallService uses local interface types for injectable mocks | Avoids coupling service tests to real filesystem/network; enables pure unit tests | Confirmed |
+| InstallService skips WriteMCPConfig for skill packages | Skill packages use WriteSkill path; MCP entry not applicable to skill-type installs | Confirmed |
+| charmbracelet/bubbles added for spinner component | SpinnerModel requires bubbles.spinner.Model; same Charm ecosystem as existing bubbletea/lipgloss | Confirmed |
 | `.agent-utils/config.json` for project config | Dedicated namespace, gitignore-able | Pending |
 | Manifest-driven registries | Extensible without CLI changes | Pending |
 
@@ -91,6 +94,7 @@ Phase 4: Distribution        [----------]  0%
 - [x] Scaffold Go module with `cobra` + `bubbletea` + `go-retryablehttp` dependencies (01-01, commit 4335d31)
 - [x] Define domain types: `Package`, `Manifest`, `MCPServerEntry` — stabilize before any CLI commands (01-01, commit 4335d31)
 - [x] Build ConfigStore (atomic installed.json CRUD) and GitHubManifestRegistry (ETag caching) (01-02, commits ead5b9b..76fdfb0)
+- [x] Build install vertical slice: npx/binary installers, ClaudeCodeAdapter, InstallService, bubbletea spinner, agentkit install command (01-03, commits f439bb2..a6f33db)
 
 ### Blockers
 
@@ -102,8 +106,8 @@ None
 
 ### Last Session
 
-**2026-06-08** — Completed 01-02-PLAN.md: ConfigStore + registry client (commits ead5b9b, 30069f2, 2bc7b30, 76fdfb0)
+**2026-06-08** — Completed 01-03-PLAN.md: Install vertical slice — npx/binary installers, ClaudeCodeAdapter (runtime path detection + atomic merge + post-install verify + foreign conflict), InstallService (9-step flow), bubbletea spinner, agentkit install command (commits f439bb2, cc807f6, 2220788, a6f33db)
 
 ### Next Action
 
-Execute plan 01-03 (next plan in phase 01-foundation).
+Execute plan 01-04 (next plan in phase 01-foundation).
