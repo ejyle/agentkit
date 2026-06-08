@@ -6,7 +6,7 @@ _Version: 0.1.0 | Generated: 2026-06-08_
 
 ## Phases
 
-- [ ] **Phase 1: Foundation** - CLI core, Claude Code adapter, and default registries deliver `agentkit install <name> --target claude` end-to-end
+- [x] **Phase 1: Foundation** - CLI core, Claude Code adapter, and default registries deliver `agentkit install <name> --target claude` end-to-end (completed 2026-06-08)
 - [ ] **Phase 2: Multi-Assistant & Full Install** - All 5+ target assistants and all 4 MCP install methods; complete CLI surface (search/update/uninstall); all registries live
 - [ ] **Phase 3: Bundled Skills** - All 9 initial skills authored and validated; `--bundle` command delivers one-command environment setup
 - [ ] **Phase 4: Distribution & Hardening** - GoReleaser v2 pipeline, Homebrew tap, `agentkit doctor`, cross-platform release; public v0.1.0 shipped
@@ -30,7 +30,7 @@ _Version: 0.1.0 | Generated: 2026-06-08_
   4. `agentkit uninstall playwright` removes the skill or MCP entry with no leftover artifacts.
   5. `agentkit update playwright` checks for newer version and upgrades or confirms up-to-date.
 
-**Plans:** 5/6 plans executed
+**Plans:** 6/6 plans complete
 
 Plans:
 **Wave 1**
@@ -52,7 +52,7 @@ Plans:
 
 **Wave 5** *(blocked on Wave 4 completion)*
 
-- [ ] 01-06-PLAN.md — Human verification checkpoint: end-to-end Phase 1 success criteria
+- [x] 01-06-PLAN.md — Human verification checkpoint: end-to-end Phase 1 success criteria
 
 ### Phase 2: Multi-Assistant & Full Install
 
@@ -106,7 +106,7 @@ Plans:
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 4/6 | In Progress|  |
+| 1. Foundation | 6/6 | Complete   | 2026-06-08 |
 | 2. Multi-Assistant & Full Install | 0/TBD | Not started | - |
 | 3. Bundled Skills | 0/TBD | Not started | - |
 | 4. Distribution & Hardening | 0/TBD | Not started | - |
