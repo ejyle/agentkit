@@ -8,8 +8,8 @@ _Version: 0.1.0 (v1) | Generated: 2026-06-08_
 
 ### CLI Commands
 
-- [ ] **CLI-01**: User can install a skill, agent, or MCP server by name (`agentkit install <name>`)
-- [ ] **CLI-02**: User can specify the target coding assistant at install time (`--target <claude|copilot|codex|gemini|opencode|pi>`)
+- [x] **CLI-01**: User can install a skill, agent, or MCP server by name (`agentkit install <name>`)
+- [x] **CLI-02**: User can specify the target coding assistant at install time (`--target <claude|copilot|codex|gemini|opencode|pi>`)
 - [ ] **CLI-03**: User can install the full GSD workflow suite in one command (`agentkit install gsd`)
 - [ ] **CLI-04**: User can bulk-install a preset bundle (`agentkit install --bundle <cloud|gsd|context|dev>`)
 - [ ] **CLI-05**: User can cleanly uninstall a package with no leftover artifacts (`agentkit uninstall <name>`)
@@ -99,8 +99,8 @@ _Each requirement maps to exactly one phase._
 
 | Requirement ID | Phase | Status |
 |----------------|-------|--------|
-| CLI-01 | Phase 1 | Pending |
-| CLI-02 | Phase 1 | Pending |
+| CLI-01 | Phase 1 | Complete |
+| CLI-02 | Phase 1 | Complete |
 | CLI-03 | Phase 3 | Pending |
 | CLI-04 | Phase 3 | Pending |
 | CLI-05 | Phase 1 | Pending |

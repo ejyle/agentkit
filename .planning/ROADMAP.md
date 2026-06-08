@@ -30,12 +30,12 @@ _Version: 0.1.0 | Generated: 2026-06-08_
   4. `agentkit uninstall playwright` removes the skill or MCP entry with no leftover artifacts.
   5. `agentkit update playwright` checks for newer version and upgrades or confirms up-to-date.
 
-**Plans:** 6 plans
+**Plans:** 1/6 plans executed
 
 Plans:
 **Wave 1**
 
-- [ ] 01-01-PLAN.md — Go scaffold, cobra CLI wiring, domain types (Package, InstalledRecord)
+- [x] 01-01-PLAN.md — Go scaffold, cobra CLI wiring, domain types (Package, InstalledRecord)
 
 **Wave 2** *(blocked on Wave 1 completion)*
 
@@ -106,7 +106,7 @@ Plans:
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 0/6 | Not started | - |
+| 1. Foundation | 1/6 | In Progress|  |
 | 2. Multi-Assistant & Full Install | 0/TBD | Not started | - |
 | 3. Bundled Skills | 0/TBD | Not started | - |
 | 4. Distribution & Hardening | 0/TBD | Not started | - |
