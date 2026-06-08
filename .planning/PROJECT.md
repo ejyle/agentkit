@@ -12,7 +12,12 @@ Zero-friction install of the right skills, agents, and MCP servers for any AI co
 
 ### Validated
 
-(None yet — ship to validate)
+- `agentkit install <name>` installs MCP server from registry, writes config atomically — Validated in Phase 01: foundation
+- `agentkit list` shows installed packages with version/type/target/registry columns — Validated in Phase 01: foundation
+- `agentkit search <query>` returns ranked registry results — Validated in Phase 01: foundation
+- `agentkit uninstall <name>` removes MCP config and installed.json entry without affecting other keys — Validated in Phase 01: foundation
+- `agentkit update [name]` checks version and reports up-to-date or upgrades — Validated in Phase 01: foundation
+- `--target claude|copilot|codex|gemini|opencode` flag validated and enforced — Validated in Phase 01: foundation
 
 ### Active
 
