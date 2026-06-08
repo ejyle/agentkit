@@ -39,10 +39,20 @@ func runSearch(cmd *cobra.Command, args []string) error {
 	reg := registry.NewRegistryManager()
 	searchSvc := service.NewSearchService(reg)
 
-	// Run search in background; drive the spinner UI from the main goroutine.
-	var outcome *searchOutcome
-	resultCh := make(chan *searchOutcome, 1)
+	if !ui.IsTerminal() {
+		// Non-interactive: run synchronously, no spinner.
+		results, err := searchSvc.Search(query)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "✗ Error: search failed: %v\n", err)
+			fmt.Fprintf(os.Stderr, "Run: agentkit list\n")
+			os.Exit(1)
+		}
+		fmt.Print(ui.RenderSearchResults(results))
+		return nil
+	}
 
+	// Interactive terminal: drive the spinner via bubbletea.
+	resultCh := make(chan *searchOutcome, 1)
 	go func() {
 		results, err := searchSvc.Search(query)
 		resultCh <- &searchOutcome{results: results, err: err}
@@ -50,8 +60,8 @@ func runSearch(cmd *cobra.Command, args []string) error {
 
 	spinnerModel := ui.NewSpinnerModel()
 	p := tea.NewProgram(spinnerModel)
+	doneCh := make(chan *searchOutcome, 1)
 
-	// Forward search result to the bubbletea program.
 	go func() {
 		out := <-resultCh
 		if out.err != nil {
@@ -59,20 +69,15 @@ func runSearch(cmd *cobra.Command, args []string) error {
 		} else {
 			p.Send(ui.DoneMsg{})
 		}
-		outcome = out
+		doneCh <- out
 	}()
 
 	if _, err := p.Run(); err != nil {
 		fmt.Fprintf(os.Stderr, "spinner error: %v\n", err)
 	}
 
-	// Ensure we have the result (should already be set, but guard for safety).
-	if outcome == nil {
-		outcome = <-resultCh
-	}
-
+	outcome := <-doneCh
 	if outcome.err != nil {
-		// D-04 format.
 		fmt.Fprintf(os.Stderr, "✗ Error: search failed: %v\n", outcome.err)
 		fmt.Fprintf(os.Stderr, "Run: agentkit list\n")
 		os.Exit(1)

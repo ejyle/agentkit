@@ -50,20 +50,28 @@ func runInstall(cmd *cobra.Command, args []string) error {
 		},
 	)
 
-	// Run install with a bubbletea spinner.
-	var installResult *installOutcome
-	spinnerModel := ui.NewSpinnerModel()
+	if !ui.IsTerminal() {
+		// Non-interactive: run synchronously, no spinner.
+		pkg, err := svc.Install(name, target)
+		if err != nil {
+			return handleInstallError(cmd, name, target, err, svc)
+		}
+		installPath := installPathFor(pkg, target)
+		fmt.Printf("✓ %s@%s installed → %s (%s)\n", pkg.Name, pkg.Version, installPath, target)
+		return nil
+	}
 
-	// Run the install in a goroutine and drive the spinner via channel messages.
+	// Interactive terminal: drive the spinner via bubbletea.
 	resultCh := make(chan *installOutcome, 1)
 	go func() {
 		pkg, err := svc.Install(name, target)
 		resultCh <- &installOutcome{pkg: pkg, err: err}
 	}()
 
-	// Create the bubbletea program. The goroutine sends its result through a channel,
-	// and we collect it via a tea.Cmd that polls the channel.
+	spinnerModel := ui.NewSpinnerModel()
 	p := tea.NewProgram(spinnerModel)
+	doneCh := make(chan *installOutcome, 1)
+
 	go func() {
 		outcome := <-resultCh
 		if outcome.err != nil {
@@ -71,26 +79,18 @@ func runInstall(cmd *cobra.Command, args []string) error {
 		} else {
 			p.Send(ui.DoneMsg{})
 		}
-		// Stash result for post-program handling.
-		installResult = outcome
+		doneCh <- outcome
 	}()
 
 	if _, err := p.Run(); err != nil {
-		// Bubbletea itself failed.
 		fmt.Fprintf(os.Stderr, "spinner error: %v\n", err)
 	}
 
-	// If the result arrived before Run() exited, use it.
-	// Otherwise wait on the channel (shouldn't happen but be safe).
-	if installResult == nil {
-		installResult = <-resultCh
-	}
-
+	installResult := <-doneCh
 	if installResult.err != nil {
 		return handleInstallError(cmd, name, target, installResult.err, svc)
 	}
 
-	// D-03 success line.
 	pkg := installResult.pkg
 	installPath := installPathFor(pkg, target)
 	fmt.Printf("✓ %s@%s installed → %s (%s)\n",

@@ -2,6 +2,7 @@ package registry
 
 import (
 	"fmt"
+	"os"
 	"sort"
 	"strings"
 
@@ -35,19 +36,28 @@ type RegistryManager struct {
 //   - gsd-core (open-gsd skill library — REG-02)
 //
 // Both URLs are HTTPS only (T-02-01).
+// If AGENTKIT_REGISTRY_FILE is set to a local JSON file path, that file is prepended
+// as a highest-priority local registry (useful for development and acceptance testing).
 func NewRegistryManager() *RegistryManager {
-	return &RegistryManager{
-		registries: []Registry{
-			NewGitHubManifestRegistry(
-				"agentkit-registry",
-				"https://raw.githubusercontent.com/ejyle/agentkit-registry/main/registry.json",
-			),
-			NewGitHubManifestRegistry(
-				"gsd-core",
-				"https://raw.githubusercontent.com/open-gsd/gsd-core/main/registry.json",
-			),
-		},
+	registries := []Registry{
+		NewGitHubManifestRegistry(
+			"agentkit-registry",
+			"https://raw.githubusercontent.com/ejyle/agentkit-registry/main/registry.json",
+		),
+		NewGitHubManifestRegistry(
+			"gsd-core",
+			"https://raw.githubusercontent.com/open-gsd/gsd-core/main/registry.json",
+		),
 	}
+
+	if localFile := os.Getenv("AGENTKIT_REGISTRY_FILE"); localFile != "" {
+		local, err := NewLocalFileRegistry("local", localFile)
+		if err == nil {
+			registries = append([]Registry{local}, registries...)
+		}
+	}
+
+	return &RegistryManager{registries: registries}
 }
 
 // NewRegistryManagerWithRegistries creates a RegistryManager with the given registries.

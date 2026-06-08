@@ -32,7 +32,7 @@ type MCPInstaller interface {
 func NewInstaller(method domain.InstallMethod) (MCPInstaller, error) {
 	switch method {
 	case domain.InstallMethodNpx:
-		return &NpxInstaller{}, nil
+		return NewNpxInstaller(), nil
 	case domain.InstallMethodBinary:
 		return NewBinaryInstaller(), nil
 	default:

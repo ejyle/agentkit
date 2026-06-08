@@ -1,0 +1,42 @@
+{
+  "packages": [
+    {
+      "name": "playwright",
+      "version": "1.40.0",
+      "description": "Playwright MCP server for browser automation — navigate pages, click elements, take screenshots, fill forms",
+      "type": "mcp",
+      "source": "github.com/ejyle/agentkit-registry",
+      "install": {
+        "method": "npx",
+        "package": "@playwright/mcp@latest",
+        "args": []
+      },
+      "mcp_entry": {
+        "name": "playwright",
+        "command": "npx",
+        "args": ["@playwright/mcp@latest"],
+        "env": {}
+      },
+      "sha256": ""
+    },
+    {
+      "name": "context7",
+      "version": "2.0.0",
+      "description": "Context7 MCP server — fetch up-to-date library documentation for Claude Code",
+      "type": "mcp",
+      "source": "github.com/ejyle/agentkit-registry",
+      "install": {
+        "method": "npx",
+        "package": "@upstash/context7-mcp@latest",
+        "args": []
+      },
+      "mcp_entry": {
+        "name": "context7",
+        "command": "npx",
+        "args": ["-y", "@upstash/context7-mcp@latest"],
+        "env": {}
+      },
+      "sha256": ""
+    }
+  ]
+}
