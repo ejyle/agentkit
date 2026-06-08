@@ -30,7 +30,7 @@ _Version: 0.1.0 | Generated: 2026-06-08_
   4. `agentkit uninstall playwright` removes the skill or MCP entry with no leftover artifacts.
   5. `agentkit update playwright` checks for newer version and upgrades or confirms up-to-date.
 
-**Plans:** 2/6 plans executed
+**Plans:** 4/6 plans executed
 
 Plans:
 **Wave 1**
@@ -43,11 +43,11 @@ Plans:
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
-- [ ] 01-03-PLAN.md — Install slice: MCP installers, ClaudeCodeAdapter, InstallService, agentkit install command
+- [x] 01-03-PLAN.md — Install slice: MCP installers, ClaudeCodeAdapter, InstallService, agentkit install command
 
 **Wave 4** *(blocked on Wave 3 completion)*
 
-- [ ] 01-04-PLAN.md — Read commands: agentkit list and agentkit search
+- [x] 01-04-PLAN.md — Read commands: agentkit list and agentkit search
 - [ ] 01-05-PLAN.md — Write commands: agentkit uninstall and agentkit update
 
 **Wave 5** *(blocked on Wave 4 completion)*
@@ -106,7 +106,7 @@ Plans:
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 2/6 | In Progress|  |
+| 1. Foundation | 4/6 | In Progress|  |
 | 2. Multi-Assistant & Full Install | 0/TBD | Not started | - |
 | 3. Bundled Skills | 0/TBD | Not started | - |
 | 4. Distribution & Hardening | 0/TBD | Not started | - |
