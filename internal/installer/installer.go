@@ -35,6 +35,8 @@ func NewInstaller(method domain.InstallMethod) (MCPInstaller, error) {
 		return NewNpxInstaller(), nil
 	case domain.InstallMethodBinary:
 		return NewBinaryInstaller(), nil
+	case domain.InstallMethodCustom:
+		return NewCustomInstaller(), nil
 	default:
 		return nil, fmt.Errorf("unsupported install method: %q", method)
 	}
