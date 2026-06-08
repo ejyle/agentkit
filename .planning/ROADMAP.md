@@ -56,18 +56,32 @@ Plans:
 
 ### Phase 2: Multi-Assistant & Full Install
 
-**Goal:** Users can install skills and MCP servers targeting any of the 5 supported coding assistants using any of the 4 install methods, with full registry coverage including mcpmarket.com and custom sources.
+**Goal:** Users can install skills and MCP servers targeting any of the 5 supported coding assistants using any of the 4 install methods.
 **Mode:** mvp
 **Depends on:** Phase 1
-**Requirements:** AST-02, AST-03, AST-04, AST-05, AST-06, MCP-02, MCP-04, REG-03, REG-04
+**Requirements:** AST-02, AST-03, AST-04, AST-05, AST-06, MCP-02, MCP-04
+**Note:** REG-03 (mcpmarket.com) and REG-04 (custom registry add) removed from v1 scope per D-01/D-02 in CONTEXT.md. Success criteria 3 and 4 from original roadmap are invalidated.
 **Success Criteria**:
 
-  1. `agentkit install <name> --target copilot` writes MCP config to the correct Copilot CLI path (runtime-detected, not hardcoded); same for `--target codex`, `--target gemini`, `--target opencode`, and `--target pi`.
-  2. `agentkit install <name>` using a pip-based or Docker-based MCP server completes without error and produces a valid, re-parseable config entry in the target assistant's config file.
-  3. `agentkit search <query>` returns results from mcpmarket.com registry when online; the command succeeds with a cache-fallback warning when mcpmarket.com is unreachable.
-  4. A user-added custom registry (`agentkit registry add <url>`) is searched alongside built-in registries and its packages are installable.
+  1. `agentkit install <name> --target copilot-cli` writes MCP config to the correct Copilot CLI path (runtime-detected, not hardcoded); same for `--target copilot-vscode`, `--target codex`, `--target gemini`, `--target opencode`, and `--target pi`.
+  2. `agentkit install <name>` using a uvx-based or Docker-based MCP server completes without error and produces a valid, re-parseable config entry in the target assistant's config file.
 
-**Plans**: TBD
+**Plans:** 5 plans
+
+Plans:
+**Wave 1**
+
+- [ ] 02-01-PLAN.md — Infrastructure: InstallMethodUvx/Docker constants, UvxInstaller, DockerInstaller, jsonMCPAdapter base, SkillInstallPath updates, --target flag expansion
+
+**Wave 2** *(parallel — all depend on Wave 1 only)*
+
+- [ ] 02-02-PLAN.md — Copilot slice: CopilotCLIAdapter (mcpServers + type:local + tools:["*"]) and CopilotVSCodeAdapter (servers key, edition detection)
+- [ ] 02-03-PLAN.md — Gemini + Pi slice: GeminiAdapter (mcpServers, full WriteSkill) and PiAdapter (mcpServers, ~/.agents/skills/)
+- [ ] 02-04-PLAN.md — Codex + OpenCode slice: CodexAdapter (TOML), OpenCodeAdapter (mcp key + array command), NewAdapter factory
+
+**Wave 3** *(blocked on Wave 2 completion)*
+
+- [ ] 02-05-PLAN.md — Human verification checkpoint: end-to-end Phase 2 success criteria
 
 ### Phase 3: Bundled Skills
 
@@ -107,6 +121,6 @@ Plans:
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 6/6 | Complete   | 2026-06-08 |
-| 2. Multi-Assistant & Full Install | 0/TBD | Not started | - |
+| 2. Multi-Assistant & Full Install | 0/5 | Planning complete | - |
 | 3. Bundled Skills | 0/TBD | Not started | - |
 | 4. Distribution & Hardening | 0/TBD | Not started | - |
