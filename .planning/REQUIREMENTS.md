@@ -103,9 +103,9 @@ _Each requirement maps to exactly one phase._
 | CLI-02 | Phase 1 | Complete |
 | CLI-03 | Phase 3 | Pending |
 | CLI-04 | Phase 3 | Pending |
-| CLI-05 | Phase 1 | Pending |
-| CLI-06 | Phase 1 | Pending |
-| CLI-07 | Phase 1 | Pending |
+| CLI-05 | Phase 1 | Complete |
+| CLI-06 | Phase 1 | Complete |
+| CLI-07 | Phase 1 | Complete |
 | CLI-08 | Phase 1 | Complete |
 | CLI-09 | Phase 1 | Pending |
 | CLI-10 | Phase 4 | Pending |

@@ -3,18 +3,18 @@ gsd_state_version: 1.0
 milestone: v0.1.0
 milestone_name: milestone
 status: executing
-last_updated: "2026-06-08T17:00:00.000Z"
+last_updated: "2026-06-08T15:20:00.000Z"
 progress:
   total_phases: 4
   completed_phases: 0
   total_plans: 6
-  completed_plans: 4
-  percent: 67
+  completed_plans: 5
+  percent: 83
 ---
 
 # STATE: agentkit
 
-_Last updated: 2026-06-08 (plan 04 complete)_
+_Last updated: 2026-06-08 (plan 05 complete)_
 
 ---
 
@@ -31,12 +31,12 @@ _Last updated: 2026-06-08 (plan 04 complete)_
 Phase: 01 (foundation) — EXECUTING
 Plan: 1 of 6
 **Phase:** 1 — Foundation
-**Plan:** 4 complete (01-04), starting 01-05
+**Plan:** 5 complete (01-05), starting 01-06
 **Status:** Executing Phase 01
-**Progress:** [███████░░░] 67%
+**Progress:** [████████░░] 83%
 
 ```
-Phase 1: Foundation          [███████░░░] 67%
+Phase 1: Foundation          [████████░░] 83%
 Phase 2: Multi-Assistant     [----------]  0%
 Phase 3: Bundled Skills      [----------]  0%
 Phase 4: Distribution        [----------]  0%
@@ -49,9 +49,9 @@ Phase 4: Distribution        [----------]  0%
 | Metric | Value |
 |--------|-------|
 | Phases complete | 0 / 4 |
-| Plans complete | 4 / 6 |
+| Plans complete | 5 / 6 |
 | Requirements mapped | 41 / 41 |
-| Requirements validated | 13 / 41 (CLI-01, CLI-02, CLI-06, CLI-08, AST-01, MCP-01, MCP-03, MCP-05, MCP-06, MCP-07, SKL-01, SKL-02, SKL-03) |
+| Requirements validated | 15 / 41 (CLI-01, CLI-02, CLI-05, CLI-06, CLI-07, CLI-08, AST-01, MCP-01, MCP-03, MCP-05, MCP-06, MCP-07, SKL-01, SKL-02, SKL-03) |
 
 ---
 
@@ -70,6 +70,8 @@ Phase 4: Distribution        [----------]  0%
 | charmbracelet/bubbles added for spinner component | SpinnerModel requires bubbles.spinner.Model; same Charm ecosystem as existing bubbletea/lipgloss | Confirmed |
 | SearchService uses local searchRegistry interface | Avoids coupling service tests to real RegistryManager; enables in-memory mocks | Confirmed |
 | RenderInstalledTable uses fixed column widths | PACKAGE=20, VERSION=10, TYPE=8, TARGET=12, REGISTRY=20 — go-list style, no terminal width dependency | Confirmed |
+| ErrNotInstalled sentinel defined in service/uninstall.go | Shared by both UninstallService and UpdateService; avoids re-definition | Confirmed |
+| installServiceAdapter bridges InstallService to updateInstaller interface | Avoids coupling cmd/update.go to service package internals | Confirmed |
 | `.agent-utils/config.json` for project config | Dedicated namespace, gitignore-able | Pending |
 | Manifest-driven registries | Extensible without CLI changes | Pending |
 
@@ -98,6 +100,7 @@ Phase 4: Distribution        [----------]  0%
 - [x] Build ConfigStore (atomic installed.json CRUD) and GitHubManifestRegistry (ETag caching) (01-02, commits ead5b9b..76fdfb0)
 - [x] Build install vertical slice: npx/binary installers, ClaudeCodeAdapter, InstallService, bubbletea spinner, agentkit install command (01-03, commits f439bb2..a6f33db)
 - [x] Build list and search commands: SearchService, lipgloss table renderer (D-05/D-06), agentkit list + agentkit search (01-04)
+- [x] Build uninstall and update commands: UninstallService (D-09), UpdateService (D-08), agentkit uninstall + agentkit update (01-05)
 
 ### Blockers
 
@@ -109,8 +112,8 @@ None
 
 ### Last Session
 
-**2026-06-08** — Completed 01-04-PLAN.md: List and search commands — SearchService (injectable interface), lipgloss D-05 table renderer, D-06 search results, agentkit list (--target, no exit on empty), agentkit search (spinner + ranked results). All 55 tests pass.
+**2026-06-08** — Completed 01-05-PLAN.md: Uninstall and update commands — UninstallService (D-09 non-destructive, ErrNotInstalled), UpdateService (D-08 InstallService delegate, UpdateAll continues on error), agentkit uninstall + agentkit update wired. 65 tests pass.
 
 ### Next Action
 
-Execute plan 01-05 (next plan in phase 01-foundation).
+Execute plan 01-06 (final plan in phase 01-foundation).

@@ -30,7 +30,7 @@ _Version: 0.1.0 | Generated: 2026-06-08_
   4. `agentkit uninstall playwright` removes the skill or MCP entry with no leftover artifacts.
   5. `agentkit update playwright` checks for newer version and upgrades or confirms up-to-date.
 
-**Plans:** 4/6 plans executed
+**Plans:** 5/6 plans executed
 
 Plans:
 **Wave 1**
@@ -48,7 +48,7 @@ Plans:
 **Wave 4** *(blocked on Wave 3 completion)*
 
 - [x] 01-04-PLAN.md — Read commands: agentkit list and agentkit search
-- [ ] 01-05-PLAN.md — Write commands: agentkit uninstall and agentkit update
+- [x] 01-05-PLAN.md — Write commands: agentkit uninstall and agentkit update
 
 **Wave 5** *(blocked on Wave 4 completion)*
 
