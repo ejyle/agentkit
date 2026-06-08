@@ -95,8 +95,48 @@ _Version: 0.1.0 (v1) | Generated: 2026-06-08_
 
 ## Traceability
 
-_Filled in by roadmap phase. Each requirement maps to exactly one phase._
+_Each requirement maps to exactly one phase._
 
-| Requirement ID | Phase | Notes |
-|----------------|-------|-------|
-| (populated by roadmap) | | |
+| Requirement ID | Phase | Status |
+|----------------|-------|--------|
+| CLI-01 | Phase 1 | Pending |
+| CLI-02 | Phase 1 | Pending |
+| CLI-03 | Phase 3 | Pending |
+| CLI-04 | Phase 3 | Pending |
+| CLI-05 | Phase 1 | Pending |
+| CLI-06 | Phase 1 | Pending |
+| CLI-07 | Phase 1 | Pending |
+| CLI-08 | Phase 1 | Pending |
+| CLI-09 | Phase 1 | Pending |
+| CLI-10 | Phase 4 | Pending |
+| REG-01 | Phase 1 | Pending |
+| REG-02 | Phase 1 | Pending |
+| REG-03 | Phase 2 | Pending |
+| REG-04 | Phase 2 | Pending |
+| REG-05 | Phase 1 | Pending |
+| REG-06 | Phase 1 | Pending |
+| AST-01 | Phase 1 | Pending |
+| AST-02 | Phase 2 | Pending |
+| AST-03 | Phase 2 | Pending |
+| AST-04 | Phase 2 | Pending |
+| AST-05 | Phase 2 | Pending |
+| AST-06 | Phase 2 | Pending |
+| MCP-01 | Phase 1 | Pending |
+| MCP-02 | Phase 2 | Pending |
+| MCP-03 | Phase 1 | Pending |
+| MCP-04 | Phase 2 | Pending |
+| MCP-05 | Phase 1 | Pending |
+| MCP-06 | Phase 1 | Pending |
+| MCP-07 | Phase 1 | Pending |
+| SKL-01 | Phase 1 | Pending |
+| SKL-02 | Phase 1 | Pending |
+| SKL-03 | Phase 1 | Pending |
+| BND-01 | Phase 3 | Pending |
+| BND-02 | Phase 3 | Pending |
+| BND-03 | Phase 3 | Pending |
+| BND-04 | Phase 3 | Pending |
+| BND-05 | Phase 3 | Pending |
+| BND-06 | Phase 3 | Pending |
+| BND-07 | Phase 3 | Pending |
+| BND-08 | Phase 3 | Pending |
+| BND-09 | Phase 3 | Pending |
