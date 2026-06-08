@@ -15,18 +15,18 @@ _Version: 0.1.0 (v1) | Generated: 2026-06-08_
 - [ ] **CLI-05**: User can cleanly uninstall a package with no leftover artifacts (`agentkit uninstall <name>`)
 - [ ] **CLI-06**: User can search all registries and get ranked results (`agentkit search <query>`)
 - [ ] **CLI-07**: User can update one or all installed packages to latest versions (`agentkit update [name]`)
-- [ ] **CLI-08**: User can list all installed packages with version, source registry, and target assistant (`agentkit list`)
+- [x] **CLI-08**: User can list all installed packages with version, source registry, and target assistant (`agentkit list`)
 - [ ] **CLI-09**: User can add or remove registry sources (`agentkit registry add <url>` / `agentkit registry remove <url>`)
 - [ ] **CLI-10**: CLI ships as a single binary with no runtime dependency, runs on Windows/Linux/macOS without root or sudo
 
 ### Registry System
 
-- [ ] **REG-01**: GitHub manifest-driven registry — any GitHub repo with a `registry.json` manifest is a valid registry source
-- [ ] **REG-02**: open-gsd/gsd-core registry integrated as a built-in default source
+- [x] **REG-01**: GitHub manifest-driven registry — any GitHub repo with a `registry.json` manifest is a valid registry source
+- [x] **REG-02**: open-gsd/gsd-core registry integrated as a built-in default source
 - [ ] **REG-03**: mcpmarket.com API registry integrated with graceful degradation (treated as optional; works offline if unavailable)
 - [ ] **REG-04**: User can add custom registry sources via `agentkit registry add` (Homebrew tap model)
-- [ ] **REG-05**: agentkit-registry GitHub repo ships as the default curated registry (lists 9 bundled skills, GSD suite, well-known MCP servers)
-- [ ] **REG-06**: Registry manifests cached locally with ETag validation; stale cache used with warning when network unavailable
+- [x] **REG-05**: agentkit-registry GitHub repo ships as the default curated registry (lists 9 bundled skills, GSD suite, well-known MCP servers)
+- [x] **REG-06**: Registry manifests cached locally with ETag validation; stale cache used with warning when network unavailable
 
 ### Target Assistant Adapters
 
@@ -106,15 +106,15 @@ _Each requirement maps to exactly one phase._
 | CLI-05 | Phase 1 | Pending |
 | CLI-06 | Phase 1 | Pending |
 | CLI-07 | Phase 1 | Pending |
-| CLI-08 | Phase 1 | Pending |
+| CLI-08 | Phase 1 | Complete |
 | CLI-09 | Phase 1 | Pending |
 | CLI-10 | Phase 4 | Pending |
-| REG-01 | Phase 1 | Pending |
-| REG-02 | Phase 1 | Pending |
+| REG-01 | Phase 1 | Complete |
+| REG-02 | Phase 1 | Complete |
 | REG-03 | Phase 2 | Pending |
 | REG-04 | Phase 2 | Pending |
-| REG-05 | Phase 1 | Pending |
-| REG-06 | Phase 1 | Pending |
+| REG-05 | Phase 1 | Complete |
+| REG-06 | Phase 1 | Complete |
 | AST-01 | Phase 1 | Pending |
 | AST-02 | Phase 2 | Pending |
 | AST-03 | Phase 2 | Pending |

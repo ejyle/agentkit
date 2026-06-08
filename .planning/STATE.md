@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v0.1.0
 milestone_name: milestone
 status: executing
-last_updated: "2026-06-08T14:51:46.681Z"
+last_updated: "2026-06-08T15:00:00.000Z"
 progress:
   total_phases: 4
   completed_phases: 0
   total_plans: 6
-  completed_plans: 1
-  percent: 0
+  completed_plans: 2
+  percent: 33
 ---
 
 # STATE: agentkit
@@ -31,12 +31,12 @@ _Last updated: 2026-06-08_
 Phase: 01 (foundation) — EXECUTING
 Plan: 1 of 6
 **Phase:** 1 — Foundation
-**Plan:** 1 complete (01-01), starting 01-02
+**Plan:** 2 complete (01-02), starting 01-03
 **Status:** Executing Phase 01
-**Progress:** [██░░░░░░░░] 17%
+**Progress:** [███░░░░░░░] 33%
 
 ```
-Phase 1: Foundation          [██░░░░░░░░] 17%
+Phase 1: Foundation          [███░░░░░░░] 33%
 Phase 2: Multi-Assistant     [----------]  0%
 Phase 3: Bundled Skills      [----------]  0%
 Phase 4: Distribution        [----------]  0%
@@ -49,7 +49,7 @@ Phase 4: Distribution        [----------]  0%
 | Metric | Value |
 |--------|-------|
 | Phases complete | 0 / 4 |
-| Plans complete | 1 / 6 |
+| Plans complete | 2 / 6 |
 | Requirements mapped | 41 / 41 |
 | Requirements validated | 2 / 41 (CLI-01, CLI-02) |
 
@@ -61,7 +61,9 @@ Phase 4: Distribution        [----------]  0%
 
 | Decision | Rationale | Status |
 |----------|-----------|--------|
-| Go over Python for CLI | Single binary, no runtime, fast startup, easy cross-compile | Pending |
+| Go over Python for CLI | Single binary, no runtime, fast startup, easy cross-compile | Confirmed |
+| Registry ID sanitized to [a-zA-Z0-9_-] before filesystem use | Prevents path traversal via malicious registry IDs (T-02-05) | Confirmed |
+| Test-mode timeout detection disables retries | responseTimeout < 1s signals test mode; avoids retry multiplication in unit tests | Confirmed |
 | User scope only (v1) | Covers majority use case; project scope adds complexity | Pending |
 | `.agent-utils/config.json` for project config | Dedicated namespace, gitignore-able | Pending |
 | Manifest-driven registries | Extensible without CLI changes | Pending |
@@ -88,6 +90,7 @@ Phase 4: Distribution        [----------]  0%
 - [ ] Create `agentkit-registry` GitHub repo with initial `registry.json` listing 9 bundled skills
 - [x] Scaffold Go module with `cobra` + `bubbletea` + `go-retryablehttp` dependencies (01-01, commit 4335d31)
 - [x] Define domain types: `Package`, `Manifest`, `MCPServerEntry` — stabilize before any CLI commands (01-01, commit 4335d31)
+- [x] Build ConfigStore (atomic installed.json CRUD) and GitHubManifestRegistry (ETag caching) (01-02, commits ead5b9b..76fdfb0)
 
 ### Blockers
 
@@ -99,8 +102,8 @@ None
 
 ### Last Session
 
-**2026-06-08** — Completed 01-01-PLAN.md: Go module scaffold and domain types (commit 4335d31)
+**2026-06-08** — Completed 01-02-PLAN.md: ConfigStore + registry client (commits ead5b9b, 30069f2, 2bc7b30, 76fdfb0)
 
 ### Next Action
 
-Execute plan 01-02 (next plan in phase 01-foundation).
+Execute plan 01-03 (next plan in phase 01-foundation).
