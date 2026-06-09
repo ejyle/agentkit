@@ -41,7 +41,10 @@ func runInstall(cmd *cobra.Command, args []string) error {
 	// Wire dependencies.
 	store := config.NewConfigStore(target)
 	reg := registry.NewRegistryManager()
-	ad := adapter.NewClaudeCodeAdapter(store)
+	ad, err := adapter.NewAdapter(target, store)
+	if err != nil {
+		return err
+	}
 
 	svc := service.NewInstallService(
 		reg, ad, store,
