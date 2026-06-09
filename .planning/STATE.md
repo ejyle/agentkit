@@ -3,18 +3,18 @@ gsd_state_version: 1.0
 milestone: v0.1.0
 milestone_name: milestone
 status: planning
-last_updated: "2026-06-09T07:18:42.421Z"
+last_updated: "2026-06-09T08:30:00.000Z"
 progress:
   total_phases: 4
   completed_phases: 2
-  total_plans: 11
+  total_plans: 17
   completed_plans: 11
   percent: 50
 ---
 
 # STATE: agentkit
 
-_Last updated: 2026-06-09 (Phase 2 complete — all 5 plans executed and verified)_
+_Last updated: 2026-06-09 (Phase 3 planned — 6 plans created, ready to execute)_
 
 ---
 
@@ -29,8 +29,8 @@ _Last updated: 2026-06-09 (Phase 2 complete — all 5 plans executed and verifie
 ## Current Position
 
 **Phase:** 3
-**Plan:** 1 of TBD
-**Status:** Ready to plan
+**Plan:** 0 of 6
+**Status:** Ready to execute
 **Progress:** [█████░░░░░] 50%
 
 ```
@@ -114,8 +114,8 @@ None
 
 ### Last Session
 
-**2026-06-09** — Completed Phase 2 (02-multi-assistant-full-install): all 5 plans executed. 6 new adapters (Copilot CLI, Copilot VSCode, Gemini, Pi, Codex, OpenCode), 2 new installers (UvxInstaller, DockerInstaller), NewAdapter factory, --target flag expansion. 126 tests pass. Human verification checkpoint approved.
+**2026-06-09** — Planned Phase 3 (03-bundled-skills): 6 plans in 4 waves. GitHubReleaseInstaller, --bundle command, 10 bundled skills (BND-01 through BND-09 + skill-author meta-skill), 10-12 external curated skills, goreleaser config update.
 
 ### Next Action
 
-Plan Phase 3 (Bundled Skills): create agentkit-registry GitHub repo, author 9 initial skills, implement --bundle command.
+Execute Phase 3 (Bundled Skills): run all 6 plans — `/gsd:execute-phase 3`
