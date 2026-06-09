@@ -37,6 +37,149 @@
         "env": {}
       },
       "sha256": ""
+    },
+    {
+      "name": "frontend-design",
+      "version": "1.0.0",
+      "description": "UI/UX design patterns — layout systems, color theory, typography, accessibility, and responsive design",
+      "type": "skill",
+      "source": "github.com/anthropics/skills",
+      "install": {
+        "method": "github-release",
+        "repo": "ejyle/agentkit",
+        "path": "skills/external/frontend-design"
+      },
+      "sha256": ""
+    },
+    {
+      "name": "mcp-builder",
+      "version": "1.0.0",
+      "description": "Build MCP servers in TypeScript or Python — tool/resource definition, transport setup, Claude Code integration",
+      "type": "skill",
+      "source": "github.com/anthropics/skills",
+      "install": {
+        "method": "github-release",
+        "repo": "ejyle/agentkit",
+        "path": "skills/external/mcp-builder"
+      },
+      "sha256": ""
+    },
+    {
+      "name": "claude-api",
+      "version": "1.0.0",
+      "description": "Integrate the Anthropic Claude API — messages, streaming, tool use, vision, prompt caching, and error handling",
+      "type": "skill",
+      "source": "github.com/anthropics/skills",
+      "install": {
+        "method": "github-release",
+        "repo": "ejyle/agentkit",
+        "path": "skills/external/claude-api"
+      },
+      "sha256": ""
+    },
+    {
+      "name": "canvas-design",
+      "version": "1.0.0",
+      "description": "HTML Canvas 2D API — drawing, animation loops, hit detection, image manipulation, and performance optimization",
+      "type": "skill",
+      "source": "github.com/anthropics/skills",
+      "install": {
+        "method": "github-release",
+        "repo": "ejyle/agentkit",
+        "path": "skills/external/canvas-design"
+      },
+      "sha256": ""
+    },
+    {
+      "name": "pdf",
+      "version": "1.0.0",
+      "description": "Generate, parse, and manipulate PDFs — Puppeteer/React-PDF generation, PDF.js rendering, text extraction, form filling",
+      "type": "skill",
+      "source": "github.com/anthropics/skills",
+      "install": {
+        "method": "github-release",
+        "repo": "ejyle/agentkit",
+        "path": "skills/external/pdf"
+      },
+      "sha256": ""
+    },
+    {
+      "name": "react-best-practices",
+      "version": "1.0.0",
+      "description": "React component design, hooks patterns, performance optimization, error boundaries, and React 18+ concurrent features",
+      "type": "skill",
+      "source": "github.com/vercel-labs/agent-skills",
+      "install": {
+        "method": "github-release",
+        "repo": "ejyle/agentkit",
+        "path": "skills/external/react-best-practices"
+      },
+      "sha256": ""
+    },
+    {
+      "name": "composition-patterns",
+      "version": "1.0.0",
+      "description": "React composition patterns — compound components, render props, slot/asChild, headless components, and provider pattern",
+      "type": "skill",
+      "source": "github.com/vercel-labs/agent-skills",
+      "install": {
+        "method": "github-release",
+        "repo": "ejyle/agentkit",
+        "path": "skills/external/composition-patterns"
+      },
+      "sha256": ""
+    },
+    {
+      "name": "react-native-skills",
+      "version": "1.0.0",
+      "description": "React Native mobile development — navigation, native APIs, styling, Expo, EAS Build, and performance patterns",
+      "type": "skill",
+      "source": "github.com/vercel-labs/agent-skills",
+      "install": {
+        "method": "github-release",
+        "repo": "ejyle/agentkit",
+        "path": "skills/external/react-native-skills"
+      },
+      "sha256": ""
+    },
+    {
+      "name": "react-view-transitions",
+      "version": "1.0.0",
+      "description": "Animated page and component transitions using the View Transitions API in React, Next.js, and React Router",
+      "type": "skill",
+      "source": "github.com/vercel-labs/agent-skills",
+      "install": {
+        "method": "github-release",
+        "repo": "ejyle/agentkit",
+        "path": "skills/external/react-view-transitions"
+      },
+      "sha256": ""
+    },
+    {
+      "name": "vercel-optimize",
+      "version": "1.0.0",
+      "description": "Next.js performance optimization on Vercel — Core Web Vitals, Image/Font optimization, ISR, Edge Runtime, bundle analysis",
+      "type": "skill",
+      "source": "github.com/vercel-labs/agent-skills",
+      "install": {
+        "method": "github-release",
+        "repo": "ejyle/agentkit",
+        "path": "skills/external/vercel-optimize"
+      },
+      "sha256": ""
+    },
+    {
+      "name": "agent-browser",
+      "version": "1.0.0",
+      "description": "AI agent browser automation — Playwright-based tool-use loop for navigating, clicking, scraping, and form submission",
+      "type": "skill",
+      "source": "github.com/vercel-labs/agent-browser",
+      "install": {
+        "method": "github-release",
+        "repo": "ejyle/agentkit",
+        "path": "skills/external/agent-browser"
+      },
+      "sha256": ""
     }
   ]
 }
