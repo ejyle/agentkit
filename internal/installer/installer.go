@@ -47,6 +47,8 @@ func NewInstaller(method domain.InstallMethod) (MCPInstaller, error) {
 		return NewUvxInstaller(), nil
 	case domain.InstallMethodDocker:
 		return NewDockerInstaller(), nil
+	case domain.InstallMethodGitHubRelease:
+		return NewGitHubReleaseInstaller(), nil
 	default:
 		return nil, fmt.Errorf("unsupported install method: %q", method)
 	}
