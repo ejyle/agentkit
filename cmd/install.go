@@ -1,3 +1,10 @@
+// CLI-03: gsd package routes through the gsd-core registry pre-registered in NewRegistryManager().
+// D-17 verification (2026-06-09): https://raw.githubusercontent.com/open-gsd/gsd-core/main/registry.json
+// returned HTTP 404 — the open-gsd/gsd-core repository does not yet exist. The registry URL is
+// pre-wired as a fallback source; when the repo is created, gsd install will resolve via it
+// automatically without any code change. Until then, agentkit install gsd will resolve from
+// agentkit-registry (first registry in the list). No additional code change needed for CLI-03.
+
 package cmd
 
 import (
@@ -6,11 +13,13 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"sync"
 
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/spf13/cobra"
 
 	"github.com/ejyle/agentkit/internal/adapter"
+	"github.com/ejyle/agentkit/internal/bundle"
 	"github.com/ejyle/agentkit/internal/config"
 	"github.com/ejyle/agentkit/internal/domain"
 	"github.com/ejyle/agentkit/internal/installer"
@@ -26,19 +35,19 @@ var installCmd = &cobra.Command{
 
 Example:
   agentkit install playwright --target claude`,
-	Args: cobra.ExactArgs(1),
+	Args: cobra.RangeArgs(0, 1),
 	RunE: runInstall,
 }
 
 func init() {
 	rootCmd.AddCommand(installCmd)
+	installCmd.Flags().StringP("bundle", "b", "", "Install a preset bundle (cloud, dev, context)")
 }
 
 func runInstall(cmd *cobra.Command, args []string) error {
-	name := args[0]
 	target, _ := cmd.Flags().GetString("target")
 
-	// Wire dependencies.
+	// Wire dependencies (shared by bundle and single-package paths).
 	store := config.NewConfigStore(target)
 	reg := registry.NewRegistryManager()
 	ad, err := adapter.NewAdapter(target, store)
@@ -52,6 +61,18 @@ func runInstall(cmd *cobra.Command, args []string) error {
 			return installer.NewInstaller(method)
 		},
 	)
+
+	// Dispatch to bundle install if --bundle flag is set.
+	bundleName, _ := cmd.Flags().GetString("bundle")
+	if bundleName != "" {
+		return runBundleInstall(cmd, bundleName, target, svc)
+	}
+
+	// Single-package install path.
+	if len(args) == 0 {
+		return fmt.Errorf("requires a package name or --bundle flag; run 'agentkit install --help'")
+	}
+	name := args[0]
 
 	if !ui.IsTerminal() {
 		// Non-interactive: run synchronously, no spinner.
@@ -98,6 +119,59 @@ func runInstall(cmd *cobra.Command, args []string) error {
 	installPath := installPathFor(pkg, target)
 	fmt.Printf("✓ %s@%s installed → %s (%s)\n",
 		pkg.Name, pkg.Version, installPath, target)
+	return nil
+}
+
+// bundleResult holds the per-package outcome of a parallel bundle install.
+type bundleResult struct {
+	name string
+	pkg  *domain.Package
+	err  error
+}
+
+// runBundleInstall installs all packages in a named bundle in parallel.
+// Uses sync.WaitGroup (NOT errgroup) for best-effort semantics — all packages
+// are attempted regardless of individual failures (D-04).
+// Exits with code 1 if any package fails (D-05).
+func runBundleInstall(_ *cobra.Command, bundleName, target string, svc *service.InstallService) error {
+	manifest, err := bundle.LoadBundles()
+	if err != nil {
+		return err
+	}
+	pkgNames, err := manifest.Resolve(bundleName)
+	if err != nil {
+		return err
+	}
+
+	results := make([]bundleResult, len(pkgNames))
+	var wg sync.WaitGroup
+	for i, name := range pkgNames {
+		wg.Add(1)
+		go func(idx int, n string) {
+			defer wg.Done()
+			pkg, installErr := svc.Install(n, target)
+			results[idx] = bundleResult{name: n, pkg: pkg, err: installErr}
+		}(i, name)
+	}
+	wg.Wait()
+
+	// Print per-package result lines (D-04 best-effort output).
+	failed := 0
+	for _, r := range results {
+		if r.err != nil {
+			fmt.Fprintf(os.Stderr, "  %s ✗ %s\n", r.name, r.err)
+			failed++
+		} else {
+			fmt.Printf("  %s ✓\n", r.name)
+		}
+	}
+
+	if failed == 0 {
+		fmt.Printf("%d/%d installed\n", len(pkgNames), len(pkgNames))
+	} else {
+		fmt.Fprintf(os.Stderr, "%d/%d installed — %d failed\n", len(pkgNames)-failed, len(pkgNames), failed)
+		os.Exit(1) // D-05: exit code 1 on any failure
+	}
 	return nil
 }
 
