@@ -96,25 +96,23 @@ Plans:
   3. Each of the 9 bundled skills passes the install-time validator: `SKILL.md` present, line count checked (warning if >500), `references/` directory present for multi-domain skills.
   4. After installing the AWS skill, `~/.claude/skills/aws/SKILL.md` and `~/.claude/skills/aws/references/` exist with the expected domain reference files (ec2.md, s3.md, iam.md).
 
-**Plans:** 5 plans
+**Plans:** 6 plans
 
 Plans:
 **Wave 1**
 
-- [ ] 03-01-PLAN.md — GitHubReleaseInstaller: tarball fetch, subdirectory extraction, path-traversal guard, caching; domain types (InstallMethodGitHubRelease, Repo/Path fields); service WriteSkill guard
+- [ ] 03-01-PLAN.md — GitHubReleaseInstaller: tarball fetch, subdirectory extraction, path-traversal guard, caching; domain types (InstallMethodGitHubRelease, Repo/Path fields, SkillDir with json:"-"); service WriteSkill guard + ValidateSkill wiring; integration test for end-to-end extraction
 
 **Wave 2** *(parallel — all depend on Wave 1 only)*
 
-- [ ] 03-02-PLAN.md — Bundle command: internal/bundle package (bundles.json embed, LoadBundles/Resolve), --bundle flag on installCmd, runBundleInstall with sync.WaitGroup; CLI-03 gsd routing verification
+- [ ] 03-02-PLAN.md — Bundle command: internal/bundle package (bundles.json embed, LoadBundles/Resolve), --bundle flag on installCmd, runBundleInstall with sync.WaitGroup; D-17 gsd registry method verified before CLI-03 implementation
 - [ ] 03-03-PLAN.md — Cloud + dev bundle skills content: aws (3 refs), gcp (4 refs), azure (3 refs), playwright (1 ref), github (3 refs), cicd (3 refs)
+- [ ] 03-04-PLAN.md — Context bundle skills + meta-skill: context-mode, rtk, serena (adapted from personal installs), skill-author meta-skill + auto-researcher agent (checkpoint for source content; fallback if paths unreadable)
+- [ ] 03-06-PLAN.md — External skill curation: 10-12 skills from Anthropic/Vercel Labs/skills.sh adapted to agentskills.io spec under skills/external/ with attribution headers; registry entries (D-12, D-13, D-15)
 
-**Wave 3** *(blocked on Wave 1; parallel with Wave 2 safe)*
+**Wave 4** *(blocked on Wave 2 + Wave 3 completion)*
 
-- [ ] 03-04-PLAN.md — Context bundle skills + meta-skill: context-mode, rtk, serena (adapted from personal installs), skill-author meta-skill + auto-researcher agent (checkpoint for source content)
-
-**Wave 4** *(blocked on Waves 2 + 3)*
-
-- [ ] 03-05-PLAN.md — Human verification checkpoint: end-to-end Phase 3 success criteria
+- [ ] 03-05-PLAN.md — Human verification checkpoint: end-to-end Phase 3 success criteria (includes end-to-end install extraction to ~/.claude/skills/aws/)
 
 ### Phase 4: Distribution & Hardening
 
@@ -139,5 +137,5 @@ Plans:
 |-------|----------------|--------|-----------|
 | 1. Foundation | 6/6 | Complete   | 2026-06-08 |
 | 2. Multi-Assistant & Full Install | 5/5 | Complete   | 2026-06-09 |
-| 3. Bundled Skills | 0/5 | Not started | - |
+| 3. Bundled Skills | 0/6 | Not started | - |
 | 4. Distribution & Hardening | 0/TBD | Not started | - |
