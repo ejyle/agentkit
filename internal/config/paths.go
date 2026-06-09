@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 )
 
 // InstalledStatePath returns the path to the per-assistant installed.json file.
@@ -34,6 +35,17 @@ func AgentBinPath() (string, error) {
 		return "", err
 	}
 	return filepath.Join(base, "agentkit", "bin"), nil
+}
+
+// TarballCachePath returns the path for a cached GitHub release tarball.
+// Path: <UserCacheDir>/agentkit/releases/<repo-slug>/<version>/tarball.tar.gz
+func TarballCachePath(repo, version string) (string, error) {
+	base, err := os.UserCacheDir()
+	if err != nil {
+		return "", err
+	}
+	slug := strings.ReplaceAll(repo, "/", "-")
+	return filepath.Join(base, "agentkit", "releases", slug, version, "tarball.tar.gz"), nil
 }
 
 // SkillInstallPath returns the install path for a named skill for a target assistant.

@@ -20,6 +20,8 @@ var (
 	ErrUvxNotFound = errors.New("uvx not found on PATH; install uv to use Python-based MCP servers: https://docs.astral.sh/uv/")
 	// ErrDockerNotFound is returned when docker is not found on PATH.
 	ErrDockerNotFound = errors.New("docker not found on PATH; install Docker: https://docs.docker.com/get-docker/")
+	// ErrGitHubReleaseNotFound is returned when the GitHub release tarball is not found (404).
+	ErrGitHubReleaseNotFound = errors.New("github-release: tarball not found; check version tag exists on GitHub")
 )
 
 // MCPInstaller is the interface for installing MCP server packages.
@@ -45,6 +47,8 @@ func NewInstaller(method domain.InstallMethod) (MCPInstaller, error) {
 		return NewUvxInstaller(), nil
 	case domain.InstallMethodDocker:
 		return NewDockerInstaller(), nil
+	case domain.InstallMethodGitHubRelease:
+		return NewGitHubReleaseInstaller(), nil
 	default:
 		return nil, fmt.Errorf("unsupported install method: %q", method)
 	}

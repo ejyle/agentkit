@@ -16,6 +16,8 @@ const (
 	InstallMethodUvx InstallMethod = "uvx"
 	// InstallMethodDocker installs via docker pull (e.g. docker pull ghcr.io/github/github-mcp-server).
 	InstallMethodDocker InstallMethod = "docker"
+	// InstallMethodGitHubRelease extracts a skill subdirectory from a GitHub release tarball.
+	InstallMethodGitHubRelease InstallMethod = "github-release"
 )
 
 // PackageType categorises what an agentkit package provides.
@@ -36,6 +38,12 @@ type InstallSpec struct {
 	Package string        `json:"package,omitempty"`
 	URL     string        `json:"url,omitempty"`
 	Args    []string      `json:"args,omitempty"`
+	// Repo and Path are used by the github-release install method only.
+	// Example: Repo = "ejyle/agentkit", Path = "skills/aws"
+	Repo string `json:"repo,omitempty"`
+	Path string `json:"path,omitempty"`
+	// SkillDir is the resolved target directory, set at runtime by service.Install() — not serialised.
+	SkillDir string `json:"-"`
 }
 
 // MCPServerEntry is a single entry in an assistant's MCP server configuration.

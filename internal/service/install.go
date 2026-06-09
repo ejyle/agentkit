@@ -3,8 +3,10 @@ package service
 
 import (
 	"fmt"
+	"os"
 	"time"
 
+	"github.com/ejyle/agentkit/internal/config"
 	"github.com/ejyle/agentkit/internal/domain"
 	"github.com/ejyle/agentkit/internal/skill"
 )
@@ -121,29 +123,47 @@ func (s *InstallService) Install(name, target string) (*domain.Package, error) {
 		return nil, err
 	}
 
-	// Step 3: Run installer.
+	// Step 3: Populate SkillDir for github-release packages before calling Install.
+	if pkg.Install.Method == domain.InstallMethodGitHubRelease {
+		skillDir, err := config.SkillInstallPath(target, name)
+		if err != nil {
+			return nil, fmt.Errorf("resolving skill install path for %q: %w", name, err)
+		}
+		pkg.Install.SkillDir = skillDir
+	}
+
+	// Step 3b: Run installer.
 	if err := inst.Install(pkg.Install); err != nil {
 		return nil, fmt.Errorf("install failed for %q: %w", name, err)
 	}
 
 	// Step 4: Skill validation (non-blocking warnings, blocking errors).
 	if pkg.Type == domain.PackageTypeSkill {
-		// For mock/unit tests, dir is empty — validator handles gracefully.
-		result := s.validator("", pkg)
+		// For github-release, validate the extracted directory.
+		// For other methods (mock/unit tests), dir is empty — validator handles gracefully.
+		validationDir := ""
+		if pkg.Install.Method == domain.InstallMethodGitHubRelease {
+			validationDir = pkg.Install.SkillDir
+		}
+		result := s.validator(validationDir, pkg)
 		for _, w := range result.Warnings {
-			fmt.Fprintf(errWriter{}, "warning: %s\n", w)
+			fmt.Fprintf(os.Stderr, "warning: %s\n", w)
 		}
 		if !result.Valid {
 			for _, e := range result.Errors {
-				fmt.Fprintf(errWriter{}, "error: %s\n", e)
+				return nil, fmt.Errorf("validating installed skill %q: %s", name, e)
 			}
 		}
 
 		// Step 6b for skills: call WriteSkill with SKILL.md bytes.
-		if err := s.adapter.WriteSkill(name, map[string][]byte{
-			"SKILL.md": []byte(""),
-		}); err != nil {
-			return nil, fmt.Errorf("writing skill files for %q: %w", name, err)
+		// For github-release, the installer already extracted all files — skip WriteSkill
+		// to avoid overwriting the extracted content.
+		if pkg.Install.Method != domain.InstallMethodGitHubRelease {
+			if err := s.adapter.WriteSkill(name, map[string][]byte{
+				"SKILL.md": []byte(""),
+			}); err != nil {
+				return nil, fmt.Errorf("writing skill files for %q: %w", name, err)
+			}
 		}
 	}
 
@@ -180,10 +200,3 @@ func (s *InstallService) Install(name, target string) (*domain.Package, error) {
 	return pkg, nil
 }
 
-// errWriter is a minimal io.Writer that writes to os.Stderr.
-type errWriter struct{}
-
-func (errWriter) Write(p []byte) (int, error) {
-	fmt.Print(string(p))
-	return len(p), nil
-}
