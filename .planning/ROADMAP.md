@@ -8,7 +8,7 @@ _Version: 0.1.0 | Generated: 2026-06-08_
 
 - [x] **Phase 1: Foundation** - CLI core, Claude Code adapter, and default registries deliver `agentkit install <name> --target claude` end-to-end (completed 2026-06-08)
 - [x] **Phase 2: Multi-Assistant & Full Install** - All 5+ target assistants and all 4 MCP install methods; complete CLI surface (search/update/uninstall); all registries live (completed 2026-06-09)
-- [ ] **Phase 3: Bundled Skills** - All 9 initial skills authored and validated; `--bundle` command delivers one-command environment setup
+- [ ] **Phase 3: Bundled Skills** - All 10 initial skills authored and validated; `--bundle` command delivers one-command environment setup
 - [ ] **Phase 4: Distribution & Hardening** - GoReleaser v2 pipeline, Homebrew tap, `agentkit doctor`, cross-platform release; public v0.1.0 shipped
 
 ---
@@ -85,7 +85,7 @@ Plans:
 
 ### Phase 3: Bundled Skills
 
-**Goal:** Users can install curated skill bundles with one command, and each of the 9 initial skills is authored to the agentskills.io spec and validated at install time.
+**Goal:** Users can install curated skill bundles with one command, and each of the 10 initial skills is authored to the agentskills.io spec and validated at install time.
 **Mode:** mvp
 **Depends on:** Phase 1
 **Requirements:** CLI-03, CLI-04, BND-01, BND-02, BND-03, BND-04, BND-05, BND-06, BND-07, BND-08, BND-09
@@ -96,8 +96,25 @@ Plans:
   3. Each of the 9 bundled skills passes the install-time validator: `SKILL.md` present, line count checked (warning if >500), `references/` directory present for multi-domain skills.
   4. After installing the AWS skill, `~/.claude/skills/aws/SKILL.md` and `~/.claude/skills/aws/references/` exist with the expected domain reference files (ec2.md, s3.md, iam.md).
 
-**Plans**: TBD
-**UI hint**: no
+**Plans:** 5 plans
+
+Plans:
+**Wave 1**
+
+- [ ] 03-01-PLAN.md — GitHubReleaseInstaller: tarball fetch, subdirectory extraction, path-traversal guard, caching; domain types (InstallMethodGitHubRelease, Repo/Path fields); service WriteSkill guard
+
+**Wave 2** *(parallel — all depend on Wave 1 only)*
+
+- [ ] 03-02-PLAN.md — Bundle command: internal/bundle package (bundles.json embed, LoadBundles/Resolve), --bundle flag on installCmd, runBundleInstall with sync.WaitGroup; CLI-03 gsd routing verification
+- [ ] 03-03-PLAN.md — Cloud + dev bundle skills content: aws (3 refs), gcp (4 refs), azure (3 refs), playwright (1 ref), github (3 refs), cicd (3 refs)
+
+**Wave 3** *(blocked on Wave 1; parallel with Wave 2 safe)*
+
+- [ ] 03-04-PLAN.md — Context bundle skills + meta-skill: context-mode, rtk, serena (adapted from personal installs), skill-author meta-skill + auto-researcher agent (checkpoint for source content)
+
+**Wave 4** *(blocked on Waves 2 + 3)*
+
+- [ ] 03-05-PLAN.md — Human verification checkpoint: end-to-end Phase 3 success criteria
 
 ### Phase 4: Distribution & Hardening
 
@@ -122,5 +139,5 @@ Plans:
 |-------|----------------|--------|-----------|
 | 1. Foundation | 6/6 | Complete   | 2026-06-08 |
 | 2. Multi-Assistant & Full Install | 5/5 | Complete   | 2026-06-09 |
-| 3. Bundled Skills | 0/TBD | Not started | - |
+| 3. Bundled Skills | 0/5 | Not started | - |
 | 4. Distribution & Hardening | 0/TBD | Not started | - |
