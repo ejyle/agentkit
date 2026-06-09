@@ -66,7 +66,7 @@ Plans:
   1. `agentkit install <name> --target copilot-cli` writes MCP config to the correct Copilot CLI path (runtime-detected, not hardcoded); same for `--target copilot-vscode`, `--target codex`, `--target gemini`, `--target opencode`, and `--target pi`.
   2. `agentkit install <name>` using a uvx-based or Docker-based MCP server completes without error and produces a valid, re-parseable config entry in the target assistant's config file.
 
-**Plans:** 1/5 plans executed
+**Plans:** 4/5 plans executed
 
 Plans:
 **Wave 1**
@@ -75,9 +75,9 @@ Plans:
 
 **Wave 2** *(parallel — all depend on Wave 1 only)*
 
-- [ ] 02-02-PLAN.md — Copilot slice: CopilotCLIAdapter (mcpServers + type:local + tools:["*"]) and CopilotVSCodeAdapter (servers key, edition detection)
-- [ ] 02-03-PLAN.md — Gemini + Pi slice: GeminiAdapter (mcpServers, full WriteSkill) and PiAdapter (mcpServers, ~/.agents/skills/)
-- [ ] 02-04-PLAN.md — Codex + OpenCode slice: CodexAdapter (TOML), OpenCodeAdapter (mcp key + array command), NewAdapter factory
+- [x] 02-02-PLAN.md — Copilot slice: CopilotCLIAdapter (mcpServers + type:local + tools:["*"]) and CopilotVSCodeAdapter (servers key, edition detection)
+- [x] 02-03-PLAN.md — Gemini + Pi slice: GeminiAdapter (mcpServers, full WriteSkill) and PiAdapter (mcpServers, ~/.agents/skills/)
+- [x] 02-04-PLAN.md — Codex + OpenCode slice: CodexAdapter (TOML), OpenCodeAdapter (mcp key + array command), NewAdapter factory
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
@@ -121,6 +121,6 @@ Plans:
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 6/6 | Complete   | 2026-06-08 |
-| 2. Multi-Assistant & Full Install | 1/5 | In Progress|  |
+| 2. Multi-Assistant & Full Install | 4/5 | In Progress|  |
 | 3. Bundled Skills | 0/TBD | Not started | - |
 | 4. Distribution & Hardening | 0/TBD | Not started | - |
