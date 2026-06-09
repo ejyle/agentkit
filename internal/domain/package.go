@@ -12,6 +12,10 @@ const (
 	InstallMethodBinary InstallMethod = "binary"
 	// InstallMethodCustom uses a custom install script.
 	InstallMethodCustom InstallMethod = "custom"
+	// InstallMethodUvx installs via uvx (e.g. uvx mcp-server-fetch).
+	InstallMethodUvx InstallMethod = "uvx"
+	// InstallMethodDocker installs via docker pull (e.g. docker pull ghcr.io/github/github-mcp-server).
+	InstallMethodDocker InstallMethod = "docker"
 )
 
 // PackageType categorises what an agentkit package provides.
