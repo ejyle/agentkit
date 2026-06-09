@@ -127,7 +127,7 @@ Plans:
   3. `agentkit doctor` checks: binary is in PATH, `~/.agentkit/` config directory is writable, network can reach the default registry, and each target assistant's config directory exists — printing a pass/warn/fail line for each check.
   4. Direct binary download from the GitHub release page installs without a package manager or root/sudo on all three platforms.
 
-**Plans:** 2/6 plans executed
+**Plans:** 3/6 plans executed
 
 Plans:
 
@@ -139,7 +139,7 @@ Plans:
 **Wave 2** *(parallel — both depend on Wave 1)*
 
 - [ ] 04-03-PLAN.md — .goreleaser.yaml GoReleaser v2 config + homebrew-agentkit repo pre-conditions (human checkpoint)
-- [ ] 04-04-PLAN.md — .github/workflows/release.yml dual-trigger release workflow
+- [x] 04-04-PLAN.md — .github/workflows/release.yml dual-trigger release workflow
 
 **Wave 3** *(depends on Wave 2)*
 
@@ -158,4 +158,4 @@ Plans:
 | 1. Foundation | 6/6 | Complete   | 2026-06-08 |
 | 2. Multi-Assistant & Full Install | 5/5 | Complete   | 2026-06-09 |
 | 3. Bundled Skills | 6/6 | Complete   | 2026-06-09 |
-| 4. Distribution & Hardening | 2/6 | In Progress|  |
+| 4. Distribution & Hardening | 3/6 | In Progress|  |

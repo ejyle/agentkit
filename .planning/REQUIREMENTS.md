@@ -17,7 +17,7 @@ _Version: 0.1.0 (v1) | Generated: 2026-06-08_
 - [ ] **CLI-07**: User can update one or all installed packages to latest versions (`agentkit update [name]`)
 - [x] **CLI-08**: User can list all installed packages with version, source registry, and target assistant (`agentkit list`)
 - [ ] **CLI-09**: User can add or remove registry sources (`agentkit registry add <url>` / `agentkit registry remove <url>`)
-- [ ] **CLI-10**: CLI ships as a single binary with no runtime dependency, runs on Windows/Linux/macOS without root or sudo
+- [x] **CLI-10**: CLI ships as a single binary with no runtime dependency, runs on Windows/Linux/macOS without root or sudo
 
 ### Registry System
 
@@ -108,7 +108,7 @@ _Each requirement maps to exactly one phase._
 | CLI-07 | Phase 1 | Complete |
 | CLI-08 | Phase 1 | Complete |
 | CLI-09 | Phase 1 | Pending |
-| CLI-10 | Phase 4 | Pending |
+| CLI-10 | Phase 4 | Complete |
 | REG-01 | Phase 1 | Complete |
 | REG-02 | Phase 1 | Complete |
 | REG-03 | Phase 2 | Pending |
