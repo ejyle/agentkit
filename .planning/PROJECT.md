@@ -108,7 +108,7 @@ Zero-friction install of the right skills, agents, and MCP servers for any AI co
 | Manifest-driven registries | Extensible without CLI changes; providers own their package listings | — Pending |
 
 ---
-*Last updated: 2026-06-08 after initialization*
+*Last updated: 2026-06-09 — Phase 3 complete: bundled skills, github-release installer, 9 authored skills + 11 external skills, --bundle flag*
 
 ## Evolution
 
