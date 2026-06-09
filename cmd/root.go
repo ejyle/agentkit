@@ -13,7 +13,7 @@ var rootCmd = &cobra.Command{
 coding agents across all major AI coding assistants.`,
 }
 
-var validTargets = []string{"claude", "copilot", "codex", "gemini", "opencode"}
+var validTargets = []string{"claude", "copilot-cli", "copilot-vscode", "codex", "gemini", "opencode", "pi"}
 
 // Execute runs the root cobra command and returns any error.
 func Execute() error {
@@ -23,7 +23,7 @@ func Execute() error {
 func init() {
 	rootCmd.PersistentFlags().StringP(
 		"target", "t", "claude",
-		"Target coding assistant (claude|copilot|codex|gemini|opencode)",
+		"Target coding assistant (claude|copilot-cli|copilot-vscode|codex|gemini|opencode|pi)",
 	)
 
 	rootCmd.PersistentPreRunE = func(cmd *cobra.Command, args []string) error {
@@ -37,7 +37,7 @@ func init() {
 			}
 		}
 		return fmt.Errorf(
-			"invalid target %q: must be one of claude, copilot, codex, gemini, opencode",
+			"invalid target %q: must be one of claude, copilot-cli, copilot-vscode, codex, gemini, opencode, pi",
 			target,
 		)
 	}

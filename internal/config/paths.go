@@ -1,6 +1,7 @@
 package config
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
 )
@@ -45,6 +46,13 @@ func SkillInstallPath(target, name string) (string, error) {
 	switch target {
 	case "claude":
 		return filepath.Join(home, ".claude", "skills", name), nil
+	case "gemini":
+		return filepath.Join(home, ".gemini", "skills", name), nil
+	case "pi":
+		// pi (personal intelligence) skills live under ~/.agents/skills/<name> per D-11.
+		return filepath.Join(home, ".agents", "skills", name), nil
+	case "copilot-cli", "copilot-vscode", "codex", "opencode":
+		return "", fmt.Errorf("SkillInstallPath: %q has no user-global skill directory", target)
 	default:
 		return filepath.Join(home, "."+target, "skills", name), nil
 	}

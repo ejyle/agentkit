@@ -43,3 +43,6 @@ func (e *ErrForeignConflict) Error() string {
 func AsErrForeignConflict(err error, target **ErrForeignConflict) bool {
 	return errors.As(err, target)
 }
+
+// ErrNotSupported is returned by adapter methods that are not applicable for a given target assistant.
+var ErrNotSupported = errors.New("operation not supported")
