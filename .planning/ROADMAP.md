@@ -8,7 +8,7 @@ _Version: 0.1.0 | Generated: 2026-06-08_
 
 - [x] **Phase 1: Foundation** - CLI core, Claude Code adapter, and default registries deliver `agentkit install <name> --target claude` end-to-end (completed 2026-06-08)
 - [x] **Phase 2: Multi-Assistant & Full Install** - All 5+ target assistants and all 4 MCP install methods; complete CLI surface (search/update/uninstall); all registries live (completed 2026-06-09)
-- [ ] **Phase 3: Bundled Skills** - All 10 initial skills authored and validated; `--bundle` command delivers one-command environment setup
+- [x] **Phase 3: Bundled Skills** - All 10 initial skills authored and validated; `--bundle` command delivers one-command environment setup (completed 2026-06-09)
 - [ ] **Phase 4: Distribution & Hardening** - GoReleaser v2 pipeline, Homebrew tap, `agentkit doctor`, cross-platform release; public v0.1.0 shipped
 
 ---
@@ -96,7 +96,7 @@ Plans:
   3. Each of the 9 bundled skills passes the install-time validator: `SKILL.md` present, line count checked (warning if >500), `references/` directory present for multi-domain skills.
   4. After installing the AWS skill, `~/.claude/skills/aws/SKILL.md` and `~/.claude/skills/aws/references/` exist with the expected domain reference files (ec2.md, s3.md, iam.md).
 
-**Plans:** 5/6 plans executed
+**Plans:** 6/6 plans complete
 
 Plans:
 **Wave 1**
@@ -112,7 +112,7 @@ Plans:
 
 **Wave 4** *(blocked on Wave 2 + Wave 3 completion)*
 
-- [ ] 03-05-PLAN.md — Human verification checkpoint: end-to-end Phase 3 success criteria (includes end-to-end install extraction to ~/.claude/skills/aws/)
+- [x] 03-05-PLAN.md — Human verification checkpoint: end-to-end Phase 3 success criteria (includes end-to-end install extraction to ~/.claude/skills/aws/)
 
 ### Phase 4: Distribution & Hardening
 
@@ -137,5 +137,5 @@ Plans:
 |-------|----------------|--------|-----------|
 | 1. Foundation | 6/6 | Complete   | 2026-06-08 |
 | 2. Multi-Assistant & Full Install | 5/5 | Complete   | 2026-06-09 |
-| 3. Bundled Skills | 5/6 | In Progress|  |
+| 3. Bundled Skills | 6/6 | Complete   | 2026-06-09 |
 | 4. Distribution & Hardening | 0/TBD | Not started | - |
