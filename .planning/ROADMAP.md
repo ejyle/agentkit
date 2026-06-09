@@ -66,12 +66,12 @@ Plans:
   1. `agentkit install <name> --target copilot-cli` writes MCP config to the correct Copilot CLI path (runtime-detected, not hardcoded); same for `--target copilot-vscode`, `--target codex`, `--target gemini`, `--target opencode`, and `--target pi`.
   2. `agentkit install <name>` using a uvx-based or Docker-based MCP server completes without error and produces a valid, re-parseable config entry in the target assistant's config file.
 
-**Plans:** 5 plans
+**Plans:** 1/5 plans executed
 
 Plans:
 **Wave 1**
 
-- [ ] 02-01-PLAN.md — Infrastructure: InstallMethodUvx/Docker constants, UvxInstaller, DockerInstaller, jsonMCPAdapter base, SkillInstallPath updates, --target flag expansion
+- [x] 02-01-PLAN.md — Infrastructure: InstallMethodUvx/Docker constants, UvxInstaller, DockerInstaller, jsonMCPAdapter base, SkillInstallPath updates, --target flag expansion
 
 **Wave 2** *(parallel — all depend on Wave 1 only)*
 
@@ -121,6 +121,6 @@ Plans:
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 6/6 | Complete   | 2026-06-08 |
-| 2. Multi-Assistant & Full Install | 0/5 | Planning complete | - |
+| 2. Multi-Assistant & Full Install | 1/5 | In Progress|  |
 | 3. Bundled Skills | 0/TBD | Not started | - |
 | 4. Distribution & Hardening | 0/TBD | Not started | - |

@@ -31,18 +31,18 @@ _Version: 0.1.0 (v1) | Generated: 2026-06-08_
 ### Target Assistant Adapters
 
 - [ ] **AST-01**: Claude Code adapter fully implemented — skills to `~/.claude/skills/`, agents to `~/.claude/agents/`, MCP config merged into `~/.claude/settings.json` (or runtime-detected path)
-- [ ] **AST-02**: GitHub Copilot CLI adapter — runtime path detection, MCP config written to correct location (CLI vs VS Code divergence handled as separate sub-adapters)
-- [ ] **AST-03**: OpenAI Codex adapter — TOML config at `~/.codex/config.toml`; MCP key names verified at build time
-- [ ] **AST-04**: Gemini CLI adapter — `~/.gemini/settings.json`; SKILL.md mapped to GEMINI.md conventions
-- [ ] **AST-05**: OpenCode adapter — `~/.config/opencode/opencode.json`; `mcp` key (not `mcpServers`), `type` field required
-- [ ] **AST-06**: Pi (pi.dev) adapter — install path and skill mechanism researched and implemented; degraded gracefully if pi.dev has no CLI-level skill system
+- [x] **AST-02**: GitHub Copilot CLI adapter — runtime path detection, MCP config written to correct location (CLI vs VS Code divergence handled as separate sub-adapters)
+- [x] **AST-03**: OpenAI Codex adapter — TOML config at `~/.codex/config.toml`; MCP key names verified at build time
+- [x] **AST-04**: Gemini CLI adapter — `~/.gemini/settings.json`; SKILL.md mapped to GEMINI.md conventions
+- [x] **AST-05**: OpenCode adapter — `~/.config/opencode/opencode.json`; `mcp` key (not `mcpServers`), `type` field required
+- [x] **AST-06**: Pi (pi.dev) adapter — install path and skill mechanism researched and implemented; degraded gracefully if pi.dev has no CLI-level skill system
 
 ### MCP Install
 
 - [ ] **MCP-01**: npx install adapter (`npx -y <package>`) — handles node-based MCP servers
-- [ ] **MCP-02**: pip install adapter (`pip install <package>`) — handles Python MCP servers
+- [x] **MCP-02**: pip install adapter (`pip install <package>`) — handles Python MCP servers
 - [ ] **MCP-03**: Binary download adapter — fetches pre-built binary from release URL, places in user PATH
-- [ ] **MCP-04**: Docker adapter — pulls image, generates run command, writes to MCP config as `docker run` entry
+- [x] **MCP-04**: Docker adapter — pulls image, generates run command, writes to MCP config as `docker run` entry
 - [ ] **MCP-05**: Provider manifest can override install method with custom steps
 - [ ] **MCP-06**: Post-install verify step re-reads written MCP config to confirm it parses correctly; install fails loudly on invalid config
 - [ ] **MCP-07**: Each adapter detects existing MCP config path at runtime (never hardcoded); merge-writes (read → merge → atomic write)
@@ -116,15 +116,15 @@ _Each requirement maps to exactly one phase._
 | REG-05 | Phase 1 | Complete |
 | REG-06 | Phase 1 | Complete |
 | AST-01 | Phase 1 | Pending |
-| AST-02 | Phase 2 | Pending |
-| AST-03 | Phase 2 | Pending |
-| AST-04 | Phase 2 | Pending |
-| AST-05 | Phase 2 | Pending |
-| AST-06 | Phase 2 | Pending |
+| AST-02 | Phase 2 | Complete |
+| AST-03 | Phase 2 | Complete |
+| AST-04 | Phase 2 | Complete |
+| AST-05 | Phase 2 | Complete |
+| AST-06 | Phase 2 | Complete |
 | MCP-01 | Phase 1 | Pending |
-| MCP-02 | Phase 2 | Pending |
+| MCP-02 | Phase 2 | Complete |
 | MCP-03 | Phase 1 | Pending |
-| MCP-04 | Phase 2 | Pending |
+| MCP-04 | Phase 2 | Complete |
 | MCP-05 | Phase 1 | Pending |
 | MCP-06 | Phase 1 | Pending |
 | MCP-07 | Phase 1 | Pending |
