@@ -96,12 +96,12 @@ Plans:
   3. Each of the 9 bundled skills passes the install-time validator: `SKILL.md` present, line count checked (warning if >500), `references/` directory present for multi-domain skills.
   4. After installing the AWS skill, `~/.claude/skills/aws/SKILL.md` and `~/.claude/skills/aws/references/` exist with the expected domain reference files (ec2.md, s3.md, iam.md).
 
-**Plans:** 6 plans
+**Plans:** 1/6 plans executed
 
 Plans:
 **Wave 1**
 
-- [ ] 03-01-PLAN.md — GitHubReleaseInstaller: tarball fetch, subdirectory extraction, path-traversal guard, caching; domain types (InstallMethodGitHubRelease, Repo/Path fields, SkillDir with json:"-"); service WriteSkill guard + ValidateSkill wiring; integration test for end-to-end extraction
+- [x] 03-01-PLAN.md — GitHubReleaseInstaller: tarball fetch, subdirectory extraction, path-traversal guard, caching; domain types (InstallMethodGitHubRelease, Repo/Path fields, SkillDir with json:"-"); service WriteSkill guard + ValidateSkill wiring; integration test for end-to-end extraction
 
 **Wave 2** *(parallel — all depend on Wave 1 only)*
 
@@ -137,5 +137,5 @@ Plans:
 |-------|----------------|--------|-----------|
 | 1. Foundation | 6/6 | Complete   | 2026-06-08 |
 | 2. Multi-Assistant & Full Install | 5/5 | Complete   | 2026-06-09 |
-| 3. Bundled Skills | 0/6 | Not started | - |
+| 3. Bundled Skills | 1/6 | In Progress|  |
 | 4. Distribution & Hardening | 0/TBD | Not started | - |
