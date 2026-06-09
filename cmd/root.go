@@ -3,14 +3,16 @@ package cmd
 import (
 	"fmt"
 
+	"github.com/ejyle/agentkit/internal/version"
 	"github.com/spf13/cobra"
 )
 
 var rootCmd = &cobra.Command{
-	Use:   "agentkit",
-	Short: "AI agent skill and MCP server manager",
-	Long: `agentkit installs, updates, and manages AI agent skills, MCP servers, and
+	Use:     "agentkit",
+	Short:   "AI agent skill and MCP server manager",
+	Long:    `agentkit installs, updates, and manages AI agent skills, MCP servers, and
 coding agents across all major AI coding assistants.`,
+	Version: version.String(),
 }
 
 var validTargets = []string{"claude", "copilot-cli", "copilot-vscode", "codex", "gemini", "opencode", "pi"}
@@ -21,6 +23,8 @@ func Execute() error {
 }
 
 func init() {
+	rootCmd.SetVersionTemplate("{{.Version}}\n")
+
 	rootCmd.PersistentFlags().StringP(
 		"target", "t", "claude",
 		"Target coding assistant (claude|copilot-cli|copilot-vscode|codex|gemini|opencode|pi)",
