@@ -127,14 +127,14 @@ Plans:
   3. `agentkit doctor` checks: binary is in PATH, `~/.agentkit/` config directory is writable, network can reach the default registry, and each target assistant's config directory exists — printing a pass/warn/fail line for each check.
   4. Direct binary download from the GitHub release page installs without a package manager or root/sudo on all three platforms.
 
-**Plans:** 6 plans
+**Plans:** 2/6 plans executed
 
 Plans:
 
 **Wave 1** *(parallel)*
 
-- [ ] 04-01-PLAN.md — internal/version package + cmd/root.go version integration (agentkit --version works end-to-end)
-- [ ] 04-02-PLAN.md — cmd/doctor.go with all D-08 checks (agentkit doctor works end-to-end)
+- [x] 04-01-PLAN.md — internal/version package + cmd/root.go version integration (agentkit --version works end-to-end)
+- [x] 04-02-PLAN.md — cmd/doctor.go with all D-08 checks (agentkit doctor works end-to-end)
 
 **Wave 2** *(parallel — both depend on Wave 1)*
 
@@ -158,4 +158,4 @@ Plans:
 | 1. Foundation | 6/6 | Complete   | 2026-06-08 |
 | 2. Multi-Assistant & Full Install | 5/5 | Complete   | 2026-06-09 |
 | 3. Bundled Skills | 6/6 | Complete   | 2026-06-09 |
-| 4. Distribution & Hardening | 0/6 | Not started | - |
+| 4. Distribution & Hardening | 2/6 | In Progress|  |
