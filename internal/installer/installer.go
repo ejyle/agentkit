@@ -16,6 +16,10 @@ var (
 	ErrChecksumMismatch = errors.New("SHA256 checksum mismatch: downloaded file does not match registry manifest")
 	// ErrInsecureURL is returned when a binary download URL uses a non-HTTPS scheme.
 	ErrInsecureURL = errors.New("insecure download URL: only https:// URLs are allowed")
+	// ErrUvxNotFound is returned when uvx is not found on PATH.
+	ErrUvxNotFound = errors.New("uvx not found on PATH; install uv to use Python-based MCP servers: https://docs.astral.sh/uv/")
+	// ErrDockerNotFound is returned when docker is not found on PATH.
+	ErrDockerNotFound = errors.New("docker not found on PATH; install Docker: https://docs.docker.com/get-docker/")
 )
 
 // MCPInstaller is the interface for installing MCP server packages.
@@ -37,6 +41,10 @@ func NewInstaller(method domain.InstallMethod) (MCPInstaller, error) {
 		return NewBinaryInstaller(), nil
 	case domain.InstallMethodCustom:
 		return NewCustomInstaller(), nil
+	case domain.InstallMethodUvx:
+		return NewUvxInstaller(), nil
+	case domain.InstallMethodDocker:
+		return NewDockerInstaller(), nil
 	default:
 		return nil, fmt.Errorf("unsupported install method: %q", method)
 	}
