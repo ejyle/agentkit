@@ -3,18 +3,18 @@ gsd_state_version: 1.0
 milestone: v0.1.0
 milestone_name: milestone
 status: executing
-last_updated: "2026-06-09T05:09:33.615Z"
+last_updated: "2026-06-09T06:00:00.000Z"
 progress:
   total_phases: 4
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 11
-  completed_plans: 7
-  percent: 25
+  completed_plans: 12
+  percent: 50
 ---
 
 # STATE: agentkit
 
-_Last updated: 2026-06-09 (Phase 2 planned — 5 plans ready)_
+_Last updated: 2026-06-09 (Phase 2 complete — all 5 plans executed and verified)_
 
 ---
 
@@ -22,24 +22,22 @@ _Last updated: 2026-06-09 (Phase 2 planned — 5 plans ready)_
 
 **Core value:** Zero-friction install of the right skills, agents, and MCP servers for any AI coding assistant — one command gets you from bare machine to fully instrumented dev environment.
 
-**Current focus:** Phase 2 — multi assistant & full install
+**Current focus:** Phase 3 — bundled skills
 
 ---
 
 ## Current Position
 
-Phase: 01 (foundation) — EXECUTING
-Plan: 1 of 5
-**Phase:** 2
-**Plan:** 1 of 5
-**Status:** Ready to execute
-**Progress:** [██████░░░░] 64%
+**Phase:** 3
+**Plan:** 1 of TBD
+**Status:** Ready to plan
+**Progress:** [█████░░░░░] 50%
 
 ```
-Phase 1: Foundation          [████████░░] 83%
-Phase 2: Multi-Assistant     [----------]  0%
-Phase 3: Bundled Skills      [----------]  0%
-Phase 4: Distribution        [----------]  0%
+Phase 1: Foundation          [██████████] 100% (complete 2026-06-08)
+Phase 2: Multi-Assistant     [██████████] 100% (complete 2026-06-09)
+Phase 3: Bundled Skills      [----------]   0%
+Phase 4: Distribution        [----------]   0%
 ```
 
 ---
@@ -48,13 +46,16 @@ Phase 4: Distribution        [----------]  0%
 
 | Metric | Value |
 |--------|-------|
-| Phases complete | 0 / 4 |
-| Plans complete | 5 / 6 |
+| Phases complete | 2 / 4 |
+| Plans complete | 12 / 11 (Phase 1: 6, Phase 2: 5, Phase 3+: TBD) |
 | Requirements mapped | 41 / 41 |
-| Requirements validated | 15 / 41 (CLI-01, CLI-02, CLI-05, CLI-06, CLI-07, CLI-08, AST-01, MCP-01, MCP-03, MCP-05, MCP-06, MCP-07, SKL-01, SKL-02, SKL-03) |
+| Requirements validated | 22 / 41 (CLI-01, CLI-02, CLI-05, CLI-06, CLI-07, CLI-08, AST-01, AST-02, AST-03, AST-04, AST-05, AST-06, MCP-01, MCP-02, MCP-03, MCP-04, MCP-05, MCP-06, MCP-07, SKL-01, SKL-02, SKL-03) |
 
----
-| Phase 02-multi-assistant-full-install P01 | 236 | - tasks | - files |
+| Phase 02 P01 (infrastructure) | ~8min | 2 tasks | 6 files |
+| Phase 02 P02 (copilot adapters) | ~6min | 2 tasks | 4 files |
+| Phase 02 P03 (gemini+pi adapters) | ~8min | 2 tasks | 4 files |
+| Phase 02 P04 (codex+opencode+factory) | ~12min | 2 tasks | 7 files |
+| Phase 02 P05 (e2e verification) | ~5min | 2 tasks | 0 files |
 
 ## Accumulated Context
 
@@ -113,8 +114,8 @@ None
 
 ### Last Session
 
-**2026-06-08** — Completed 01-05-PLAN.md: Uninstall and update commands — UninstallService (D-09 non-destructive, ErrNotInstalled), UpdateService (D-08 InstallService delegate, UpdateAll continues on error), agentkit uninstall + agentkit update wired. 65 tests pass.
+**2026-06-09** — Completed Phase 2 (02-multi-assistant-full-install): all 5 plans executed. 6 new adapters (Copilot CLI, Copilot VSCode, Gemini, Pi, Codex, OpenCode), 2 new installers (UvxInstaller, DockerInstaller), NewAdapter factory, --target flag expansion. 126 tests pass. Human verification checkpoint approved.
 
 ### Next Action
 
-Execute plan 01-06 (final plan in phase 01-foundation).
+Plan Phase 3 (Bundled Skills): create agentkit-registry GitHub repo, author 9 initial skills, implement --bundle command.

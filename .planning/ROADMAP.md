@@ -7,7 +7,7 @@ _Version: 0.1.0 | Generated: 2026-06-08_
 ## Phases
 
 - [x] **Phase 1: Foundation** - CLI core, Claude Code adapter, and default registries deliver `agentkit install <name> --target claude` end-to-end (completed 2026-06-08)
-- [ ] **Phase 2: Multi-Assistant & Full Install** - All 5+ target assistants and all 4 MCP install methods; complete CLI surface (search/update/uninstall); all registries live
+- [x] **Phase 2: Multi-Assistant & Full Install** - All 5+ target assistants and all 4 MCP install methods; complete CLI surface (search/update/uninstall); all registries live (completed 2026-06-09)
 - [ ] **Phase 3: Bundled Skills** - All 9 initial skills authored and validated; `--bundle` command delivers one-command environment setup
 - [ ] **Phase 4: Distribution & Hardening** - GoReleaser v2 pipeline, Homebrew tap, `agentkit doctor`, cross-platform release; public v0.1.0 shipped
 
@@ -66,7 +66,7 @@ Plans:
   1. `agentkit install <name> --target copilot-cli` writes MCP config to the correct Copilot CLI path (runtime-detected, not hardcoded); same for `--target copilot-vscode`, `--target codex`, `--target gemini`, `--target opencode`, and `--target pi`.
   2. `agentkit install <name>` using a uvx-based or Docker-based MCP server completes without error and produces a valid, re-parseable config entry in the target assistant's config file.
 
-**Plans:** 4/5 plans executed
+**Plans:** 5/5 plans complete
 
 Plans:
 **Wave 1**
@@ -81,7 +81,7 @@ Plans:
 
 **Wave 3** *(blocked on Wave 2 completion)*
 
-- [ ] 02-05-PLAN.md — Human verification checkpoint: end-to-end Phase 2 success criteria
+- [x] 02-05-PLAN.md — Human verification checkpoint: end-to-end Phase 2 success criteria
 
 ### Phase 3: Bundled Skills
 
@@ -121,6 +121,6 @@ Plans:
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 6/6 | Complete   | 2026-06-08 |
-| 2. Multi-Assistant & Full Install | 4/5 | In Progress|  |
+| 2. Multi-Assistant & Full Install | 5/5 | Complete   | 2026-06-09 |
 | 3. Bundled Skills | 0/TBD | Not started | - |
 | 4. Distribution & Hardening | 0/TBD | Not started | - |
