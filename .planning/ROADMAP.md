@@ -9,7 +9,7 @@ _Version: 0.1.0 | Generated: 2026-06-08_
 - [x] **Phase 1: Foundation** - CLI core, Claude Code adapter, and default registries deliver `agentkit install <name> --target claude` end-to-end (completed 2026-06-08)
 - [x] **Phase 2: Multi-Assistant & Full Install** - All 5+ target assistants and all 4 MCP install methods; complete CLI surface (search/update/uninstall); all registries live (completed 2026-06-09)
 - [x] **Phase 3: Bundled Skills** - All 10 initial skills authored and validated; `--bundle` command delivers one-command environment setup (completed 2026-06-09)
-- [ ] **Phase 4: Distribution & Hardening** - GoReleaser v2 pipeline, Homebrew tap, `agentkit doctor`, cross-platform release; public v0.1.0 shipped
+- [x] **Phase 4: Distribution & Hardening** - GoReleaser v2 pipeline, Homebrew tap, `agentkit doctor`, cross-platform release; public v0.1.0 shipped (completed 2026-06-10)
 
 ---
 
@@ -127,7 +127,7 @@ Plans:
   3. `agentkit doctor` checks: binary is in PATH, `~/.agentkit/` config directory is writable, network can reach the default registry, and each target assistant's config directory exists — printing a pass/warn/fail line for each check.
   4. Direct binary download from the GitHub release page installs without a package manager or root/sudo on all three platforms.
 
-**Plans:** 5/6 plans executed
+**Plans:** 6/6 plans complete
 
 Plans:
 
@@ -147,7 +147,7 @@ Plans:
 
 **Wave 4** *(depends on all prior)*
 
-- [ ] 04-06-PLAN.md — v0.1.0 tag push + end-to-end release verification (human checkpoint)
+- [x] 04-06-PLAN.md — v0.1.0 tag push + end-to-end release verification (human checkpoint)
 
 ---
 
@@ -158,4 +158,4 @@ Plans:
 | 1. Foundation | 6/6 | Complete   | 2026-06-08 |
 | 2. Multi-Assistant & Full Install | 5/5 | Complete   | 2026-06-09 |
 | 3. Bundled Skills | 6/6 | Complete   | 2026-06-09 |
-| 4. Distribution & Hardening | 5/6 | In Progress|  |
+| 4. Distribution & Hardening | 6/6 | Complete   | 2026-06-10 |
