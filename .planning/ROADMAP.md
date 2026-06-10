@@ -127,7 +127,7 @@ Plans:
   3. `agentkit doctor` checks: binary is in PATH, `~/.agentkit/` config directory is writable, network can reach the default registry, and each target assistant's config directory exists — printing a pass/warn/fail line for each check.
   4. Direct binary download from the GitHub release page installs without a package manager or root/sudo on all three platforms.
 
-**Plans:** 4/6 plans executed
+**Plans:** 5/6 plans executed
 
 Plans:
 
@@ -143,7 +143,7 @@ Plans:
 
 **Wave 3** *(depends on Wave 2)*
 
-- [ ] 04-05-PLAN.md — scripts/install.sh curl|sh install script with SHA256 checksum verification
+- [x] 04-05-PLAN.md — scripts/install.sh curl|sh install script with SHA256 checksum verification
 
 **Wave 4** *(depends on all prior)*
 
@@ -158,4 +158,4 @@ Plans:
 | 1. Foundation | 6/6 | Complete   | 2026-06-08 |
 | 2. Multi-Assistant & Full Install | 5/5 | Complete   | 2026-06-09 |
 | 3. Bundled Skills | 6/6 | Complete   | 2026-06-09 |
-| 4. Distribution & Hardening | 4/6 | In Progress|  |
+| 4. Distribution & Hardening | 5/6 | In Progress|  |
