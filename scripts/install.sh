@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 # install.sh — curl|sh installer for agentkit
 #
 # Usage:
@@ -11,7 +11,22 @@
 
 set -euo pipefail
 
-VERSION="${AGENTKIT_VERSION:-0.1.0}"
+_resolve_version() {
+  local api_url="https://api.github.com/repos/ejyle/agentkit/releases/latest"
+  local tag
+  tag=$(curl -fsSL "$api_url" | grep '"tag_name"' | sed 's/.*"tag_name": *"\([^"]*\)".*/\1/' | sed 's/^v//')
+  if [ -z "$tag" ]; then
+    printf 'Could not determine latest version from GitHub API\n' >&2
+    exit 1
+  fi
+  printf '%s' "$tag"
+}
+
+VERSION="${AGENTKIT_VERSION:-}"
+if [ -z "$VERSION" ]; then
+  printf 'Detecting latest version...\n'
+  VERSION=$(_resolve_version)
+fi
 
 # Detect OS
 OS=$(uname -s | tr '[:upper:]' '[:lower:]')
@@ -68,11 +83,10 @@ curl -fsSL "${BASE_URL}/checksums.txt" -o "${TMPDIR}/checksums.txt"
 
 # Verify SHA256 checksum BEFORE any binary execution
 printf 'Verifying checksum...\n'
-cd "${TMPDIR}"
-${SHA_CMD} --check --ignore-missing checksums.txt
+grep "${FILENAME}" "${TMPDIR}/checksums.txt" | (cd "${TMPDIR}" && ${SHA_CMD} --check -)
 
-# Extract binary
-tar -xzf "${TMPDIR}/${FILENAME}" -C "${TMPDIR}" agentkit
+# Extract binary (GoReleaser nests binary in agentkit_VERSION_OS_ARCH/agentkit)
+tar -xzf "${TMPDIR}/${FILENAME}" -C "${TMPDIR}" --strip-components=1 --wildcards "*/agentkit"
 
 # Install to user-local bin (no sudo required — CLI-10)
 INSTALL_DIR="${HOME}/.local/bin"

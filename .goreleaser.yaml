@@ -56,7 +56,7 @@ signs:
       - "${artifact}"
       - "--yes"
 
-homebrew_casks:
+brews:
   - repository:
       owner: ejyle
       name: homebrew-agentkit
