@@ -2,13 +2,13 @@ package config
 
 import (
 	"encoding/json"
+	"fmt"
 	"os"
 	"path/filepath"
 	"sort"
 	"sync"
 
 	"github.com/ejyle/agentkit/internal/domain"
-	"github.com/google/renameio/v2"
 )
 
 // ConfigStore manages the per-assistant installed.json state file.
@@ -121,12 +121,38 @@ func (s *ConfigStore) loadStateUnlocked() (domain.InstalledState, error) {
 	return state, nil
 }
 
-// writeStateUnlocked serialises state and writes it atomically via renameio.
+// writeStateUnlocked serialises state and writes it atomically via temp-file rename.
 // Caller must hold s.mu.
 func (s *ConfigStore) writeStateUnlocked(state domain.InstalledState) error {
 	data, err := json.MarshalIndent(state, "", "  ")
 	if err != nil {
 		return err
 	}
-	return renameio.WriteFile(s.basePath, data, 0644)
+	return writeFileAtomic(s.basePath, data, 0644)
+}
+
+// writeFileAtomic writes data to path atomically using a temp file + rename.
+// Works on all platforms (renameio is Unix-only).
+func writeFileAtomic(path string, data []byte, perm os.FileMode) error {
+	dir := filepath.Dir(path)
+	f, err := os.CreateTemp(dir, ".tmp-*")
+	if err != nil {
+		return fmt.Errorf("create temp file: %w", err)
+	}
+	tmp := f.Name()
+	if _, err := f.Write(data); err != nil {
+		f.Close()
+		os.Remove(tmp)
+		return err
+	}
+	if err := f.Chmod(perm); err != nil {
+		f.Close()
+		os.Remove(tmp)
+		return err
+	}
+	if err := f.Close(); err != nil {
+		os.Remove(tmp)
+		return err
+	}
+	return os.Rename(tmp, path)
 }
