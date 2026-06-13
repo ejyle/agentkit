@@ -8,7 +8,7 @@ import (
 
 	"github.com/ejyle/agentkit/internal/config"
 	"github.com/ejyle/agentkit/internal/domain"
-	"github.com/google/renameio/v2"
+	"github.com/ejyle/agentkit/internal/fileutil"
 )
 
 // jsonMCPAdapter is a shared base for AI coding assistants that store MCP server config
@@ -132,7 +132,7 @@ func (a *jsonMCPAdapter) WriteMCPConfig(entry domain.MCPServerEntry, _ *domain.I
 	if err != nil {
 		return err
 	}
-	if err := renameio.WriteFile(path, data, 0644); err != nil {
+	if err := fileutil.WriteFile(path, data, 0644); err != nil {
 		return fmt.Errorf("writing MCP config: %w", err)
 	}
 
@@ -174,7 +174,7 @@ func (a *jsonMCPAdapter) RemoveMCPConfig(name string) error {
 	if err != nil {
 		return err
 	}
-	return renameio.WriteFile(path, data, 0644)
+	return fileutil.WriteFile(path, data, 0644)
 }
 
 // ReadMCPConfig reads and parses all MCP server entries from the config file.

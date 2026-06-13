@@ -8,7 +8,7 @@ import (
 
 	"github.com/ejyle/agentkit/internal/config"
 	"github.com/ejyle/agentkit/internal/domain"
-	"github.com/google/renameio/v2"
+	"github.com/ejyle/agentkit/internal/fileutil"
 )
 
 // ClaudeCodeAdapter implements AssistantAdapter for Claude Code.
@@ -147,7 +147,7 @@ func (a *ClaudeCodeAdapter) WriteMCPConfig(entry domain.MCPServerEntry, _ *domai
 	if err != nil {
 		return err
 	}
-	if err := renameio.WriteFile(path, data, 0644); err != nil {
+	if err := fileutil.WriteFile(path, data, 0644); err != nil {
 		return fmt.Errorf("writing MCP config: %w", err)
 	}
 
@@ -185,7 +185,7 @@ func (a *ClaudeCodeAdapter) RemoveMCPConfig(name string) error {
 	if err != nil {
 		return err
 	}
-	return renameio.WriteFile(path, data, 0644)
+	return fileutil.WriteFile(path, data, 0644)
 }
 
 // ReadMCPConfig reads and parses all mcpServers entries from Claude Code's config file.
@@ -223,7 +223,7 @@ func (a *ClaudeCodeAdapter) WriteSkill(name string, files map[string][]byte) err
 	}
 	for filename, content := range files {
 		dest := filepath.Join(skillPath, filename)
-		if err := renameio.WriteFile(dest, content, 0644); err != nil {
+		if err := fileutil.WriteFile(dest, content, 0644); err != nil {
 			return fmt.Errorf("writing skill file %s: %w", filename, err)
 		}
 	}

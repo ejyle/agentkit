@@ -8,7 +8,7 @@ import (
 
 	"github.com/ejyle/agentkit/internal/config"
 	"github.com/ejyle/agentkit/internal/domain"
-	"github.com/google/renameio/v2"
+	"github.com/ejyle/agentkit/internal/fileutil"
 )
 
 // OpenCodeAdapter implements AssistantAdapter for OpenCode.
@@ -153,7 +153,7 @@ func (a *OpenCodeAdapter) WriteMCPConfig(entry domain.MCPServerEntry, _ *domain.
 	if err != nil {
 		return err
 	}
-	if err := renameio.WriteFile(path, data, 0644); err != nil {
+	if err := fileutil.WriteFile(path, data, 0644); err != nil {
 		return fmt.Errorf("writing OpenCode config: %w", err)
 	}
 
@@ -191,7 +191,7 @@ func (a *OpenCodeAdapter) RemoveMCPConfig(name string) error {
 	if err != nil {
 		return err
 	}
-	return renameio.WriteFile(path, data, 0644)
+	return fileutil.WriteFile(path, data, 0644)
 }
 
 // ReadMCPConfig reads and parses all mcp entries from opencode.json.

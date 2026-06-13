@@ -14,7 +14,7 @@ import (
 
 	"github.com/ejyle/agentkit/internal/config"
 	"github.com/ejyle/agentkit/internal/domain"
-	"github.com/google/renameio/v2"
+	"github.com/ejyle/agentkit/internal/fileutil"
 )
 
 // Version is the current agentkit binary version.
@@ -169,7 +169,7 @@ func (g *GitHubReleaseInstaller) fetchTarball(tarURL, cacheKey, repo, version st
 	// Write to disk cache atomically.
 	if diskPathErr == nil && diskPath != "" {
 		if mkErr := os.MkdirAll(filepath.Dir(diskPath), 0755); mkErr == nil {
-			_ = renameio.WriteFile(diskPath, data, 0644)
+			_ = fileutil.WriteFile(diskPath, data, 0644)
 		}
 	}
 

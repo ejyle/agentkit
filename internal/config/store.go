@@ -2,13 +2,13 @@ package config
 
 import (
 	"encoding/json"
-	"fmt"
 	"os"
 	"path/filepath"
 	"sort"
 	"sync"
 
 	"github.com/ejyle/agentkit/internal/domain"
+	"github.com/ejyle/agentkit/internal/fileutil"
 )
 
 // ConfigStore manages the per-assistant installed.json state file.
@@ -128,31 +128,5 @@ func (s *ConfigStore) writeStateUnlocked(state domain.InstalledState) error {
 	if err != nil {
 		return err
 	}
-	return writeFileAtomic(s.basePath, data, 0644)
-}
-
-// writeFileAtomic writes data to path atomically using a temp file + rename.
-// Works on all platforms (renameio is Unix-only).
-func writeFileAtomic(path string, data []byte, perm os.FileMode) error {
-	dir := filepath.Dir(path)
-	f, err := os.CreateTemp(dir, ".tmp-*")
-	if err != nil {
-		return fmt.Errorf("create temp file: %w", err)
-	}
-	tmp := f.Name()
-	if _, err := f.Write(data); err != nil {
-		f.Close()
-		os.Remove(tmp)
-		return err
-	}
-	if err := f.Chmod(perm); err != nil {
-		f.Close()
-		os.Remove(tmp)
-		return err
-	}
-	if err := f.Close(); err != nil {
-		os.Remove(tmp)
-		return err
-	}
-	return os.Rename(tmp, path)
+	return fileutil.WriteFile(s.basePath, data, 0644)
 }

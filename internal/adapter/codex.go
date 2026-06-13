@@ -9,7 +9,7 @@ import (
 	"github.com/BurntSushi/toml"
 	"github.com/ejyle/agentkit/internal/config"
 	"github.com/ejyle/agentkit/internal/domain"
-	"github.com/google/renameio/v2"
+	"github.com/ejyle/agentkit/internal/fileutil"
 )
 
 // CodexAdapter implements AssistantAdapter for OpenAI Codex CLI.
@@ -84,7 +84,7 @@ func (a *CodexAdapter) writeRawConfig(raw map[string]interface{}) error {
 	if err := enc.Encode(raw); err != nil {
 		return fmt.Errorf("encoding TOML config: %w", err)
 	}
-	if err := renameio.WriteFile(path, buf.Bytes(), 0644); err != nil {
+	if err := fileutil.WriteFile(path, buf.Bytes(), 0644); err != nil {
 		return fmt.Errorf("writing TOML config: %w", err)
 	}
 	return nil

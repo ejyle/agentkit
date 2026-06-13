@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/ejyle/agentkit/internal/domain"
-	"github.com/google/renameio/v2"
+	"github.com/ejyle/agentkit/internal/fileutil"
 )
 
 // CachedManifest is the on-disk representation of a cached registry manifest.
@@ -43,5 +43,5 @@ func saveCache(path string, c CachedManifest) error {
 	if err != nil {
 		return err
 	}
-	return renameio.WriteFile(path, data, 0644)
+	return fileutil.WriteFile(path, data, 0644)
 }

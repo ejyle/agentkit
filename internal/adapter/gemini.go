@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 
 	"github.com/ejyle/agentkit/internal/config"
-	"github.com/google/renameio/v2"
+	"github.com/ejyle/agentkit/internal/fileutil"
 )
 
 // GeminiAdapter implements AssistantAdapter for Gemini CLI.
@@ -53,7 +53,7 @@ func (a *GeminiAdapter) WriteSkill(name string, files map[string][]byte) error {
 	}
 	for filename, content := range files {
 		dest := filepath.Join(skillPath, filename)
-		if err := renameio.WriteFile(dest, content, 0644); err != nil {
+		if err := fileutil.WriteFile(dest, content, 0644); err != nil {
 			return fmt.Errorf("writing skill file %s: %w", filename, err)
 		}
 	}
