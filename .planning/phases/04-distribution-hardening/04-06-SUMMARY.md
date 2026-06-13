@@ -101,35 +101,24 @@ The plan's Task 1 action says to push the v0.1.0 tag, but the orchestrator's `<o
 
 None — all pre-flight checks passed on first run.
 
-## Checkpoint Outcome
+## User Setup Required
 
-**User decision (2026-06-13):** Defer v0.1.0 tag push — push code to GitHub first, release when ready.
+**The following steps require manual human action at this checkpoint:**
 
-**Code has been pushed to GitHub:** https://github.com/ejyle/agentkit
-
-- `main` branch: README only (public-facing landing page)
-- `dev` branch: all agentkit code (phases 1–4, all 23 plans)
-- Remote: `git@github.com:ejyle/agentkit.git`
-
-## Release-When-Ready Steps
-
-When ready to publish v0.1.0:
-
-1. Optionally set up Homebrew tap first (create `ejyle/homebrew-agentkit` repo with empty `Casks/` directory)
-2. Push the release tag:
+1. Push the v0.1.0 tag:
    ```
-   git checkout dev
    git tag v0.1.0 -m "Release v0.1.0 — first public release of agentkit"
    git push origin v0.1.0
    ```
-3. Monitor GitHub Actions at https://github.com/ejyle/agentkit/actions
-4. Verify GitHub Release page shows 5 platform binaries + checksums.txt + sigstore bundle
+
+2. Monitor GitHub Actions at https://github.com/ejyle/agentkit/actions
+
+3. Verify the 6 criteria in the checkpoint (see checkpoint details below)
 
 ## Next Phase Readiness
 
-- Phase 4 is the final phase. All distribution infrastructure is in place and code is on GitHub.
-- v0.1.0 tag push is deferred to human action — no further agent work required.
-- Milestone v0.1.0 is considered infrastructure-complete; release is a human gate.
+- Phase 4 is the final phase. Once v0.1.0 verification passes, the project milestone is complete.
+- After verification: update STATE.md to mark phase 4 complete, milestone v0.1.0 achieved.
 
 ---
 *Phase: 04-distribution-hardening*
