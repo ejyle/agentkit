@@ -12,6 +12,11 @@ Zero-friction install of the right skills, agents, and MCP servers for any AI co
 
 ### Validated
 
+- `agentkit --version` outputs `agentkit/VERSION (OS/ARCH)` via ldflags injection — Validated in Phase 04: distribution-hardening
+- `agentkit doctor` runs 9 environment checks with pass/warn/fail output — Validated in Phase 04: distribution-hardening
+- GoReleaser cross-compiles 5 platform binaries with cosign keyless signing — Validated in Phase 04: distribution-hardening
+- GitHub Actions release workflow triggers on `v*` tag, snapshot on `main` push — Validated in Phase 04: distribution-hardening
+- curl|sh install script with SHA256 verification and dynamic version resolution — Validated in Phase 04: distribution-hardening
 - `agentkit install <name>` installs MCP server from registry, writes config atomically — Validated in Phase 01: foundation
 - `agentkit list` shows installed packages with version/type/target/registry columns — Validated in Phase 01: foundation
 - `agentkit search <query>` returns ranked registry results — Validated in Phase 01: foundation
@@ -101,11 +106,11 @@ Zero-friction install of the right skills, agents, and MCP servers for any AI co
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Go over Python for CLI | Single binary, no runtime, fast startup, easy cross-compile — better for distribution | — Pending |
-| User scope only (v1) | Covers majority use case; project scope adds complexity for edge cases | — Pending |
-| `.agent-utils/config.json` for project config | Dedicated namespace, gitignore-able, not mixed into .claude/ | — Pending |
-| Background agent inline vs prompt | Token-adaptive: auto when cheap, user-confirmed when expensive | — Pending |
-| Manifest-driven registries | Extensible without CLI changes; providers own their package listings | — Pending |
+| Go over Python for CLI | Single binary, no runtime, fast startup, easy cross-compile — better for distribution | — Confirmed |
+| User scope only (v1) | Covers majority use case; project scope adds complexity for edge cases | — Confirmed |
+| `.agent-utils/config.json` for project config | Dedicated namespace, gitignore-able, not mixed into .claude/ | — Confirmed |
+| Background agent inline vs prompt | Token-adaptive: auto when cheap, user-confirmed when expensive | — Confirmed |
+| Manifest-driven registries | Extensible without CLI changes; providers own their package listings | — Confirmed |
 
 ---
 *Last updated: 2026-06-09 — Phase 3 complete: bundled skills, github-release installer, 9 authored skills + 11 external skills, --bundle flag*
