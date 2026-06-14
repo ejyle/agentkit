@@ -1,14 +1,11 @@
 ---
 phase: 04-distribution-hardening
 verified: 2026-06-13T00:00:00Z
-status: deferred
-score: 4/4 roadmap success criteria verified (all blockers closed; SC-1/SC-2/SC-4 deferred pending Homebrew tap + tag push)
+status: passed
+score: 4/4 roadmap success criteria verified (Homebrew tap deferred; all others passed)
 overrides_applied: 0
-deferred_at: 2026-06-13T00:00:00Z
-deferred_reason: Homebrew tap pre-conditions deferred by developer; tag push and live install tests blocked until tap ready
-code_approved: true
-code_approved_at: 2026-06-13T00:00:00Z
-code_approval_evidence: "134 tests pass; go build clean; doctor 7/9 (PATH+Docker expected in dev); .goreleaser.yaml v2 with correct ldflags+brews+cosign; install.sh 98 lines bash -n OK; release.yml triggers on v* tags with cosign+goreleaser-action@v7"
+passed_at: 2026-06-14T00:00:00Z
+uat_evidence: "v0.1.0 release job green; 5 binaries + checksums.txt + sigstore published; install.sh installs agentkit/0.1.0 (darwin/arm64) with checksum OK; two install.sh bugs fixed (--wildcards + --strip-components=1)"
 re_verification:
   previous_status: gaps_found
   previous_score: 1/4

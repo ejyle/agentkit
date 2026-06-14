@@ -1,14 +1,11 @@
 ---
 phase: 03-bundled-skills
 verified: 2026-06-09T00:00:00Z
-status: deferred
-score: 8/10 must-haves verified (2 deferred D-17 gate)
+status: passed
+score: 9/10 must-haves verified (1 deferred: gsd-core external registry)
 overrides_applied: 0
-deferred_at: 2026-06-13T00:00:00Z
-deferred_reason: D-17 gate — live install tests require published v0.1.0 release tarball
-code_approved: true
-code_approved_at: 2026-06-13T00:00:00Z
-code_approval_evidence: "134 tests pass; go build clean; all 9 SKILL.md files verified; ValidateSkill wiring verified; GitHubReleaseInstaller unit+integration tested"
+passed_at: 2026-06-14T00:00:00Z
+uat_evidence: "bundle cloud/dev/context all 3/3; aws skill dir SKILL.md+3 refs confirmed; all 9 skills pass validator 0 blocking errors; install.sh works end-to-end"
 human_verification:
   - test: "Run `agentkit install --bundle cloud` (requires published GitHub release tag)"
     expected: "aws, gcp, azure skills installed to ~/.claude/skills/; each passes validator; success lines printed; exit 0"
