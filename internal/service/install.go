@@ -132,6 +132,9 @@ func (s *InstallService) Install(name, target string) (*domain.Package, error) {
 		pkg.Install.SkillDir = skillDir
 	}
 
+	// Step 3a: Substitute $TARGET in Args for custom packages that are target-aware.
+	pkg.Install = substituteTarget(pkg.Install, target)
+
 	// Step 3b: Run installer.
 	if err := inst.Install(pkg.Install); err != nil {
 		return nil, fmt.Errorf("install failed for %q: %w", name, err)
@@ -198,5 +201,41 @@ func (s *InstallService) Install(name, target string) (*domain.Package, error) {
 
 	// Step 9: Return package.
 	return pkg, nil
+}
+
+// substituteTarget replaces the literal string "$TARGET" in spec.Args with the
+// target-appropriate flag so packages like gsd can pass --claude/--gemini/--codex
+// to their installers without hardcoding one runtime.
+func substituteTarget(spec domain.InstallSpec, target string) domain.InstallSpec {
+	flag := targetFlag(target)
+	args := make([]string, len(spec.Args))
+	for i, a := range spec.Args {
+		if a == "--$TARGET" {
+			args[i] = flag
+		} else {
+			args[i] = a
+		}
+	}
+	spec.Args = args
+	return spec
+}
+
+// targetFlag maps an agentkit target name to the appropriate runtime flag
+// for external installers (e.g. @opengsd/gsd-core@latest).
+func targetFlag(target string) string {
+	switch target {
+	case "claude":
+		return "--claude"
+	case "gemini":
+		return "--gemini"
+	case "codex":
+		return "--codex"
+	case "opencode":
+		return "--opencode"
+	case "copilot-cli", "copilot-vscode":
+		return "--copilot"
+	default:
+		return "--claude"
+	}
 }
 

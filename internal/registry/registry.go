@@ -48,6 +48,7 @@ func NewRegistryManager() *RegistryManager {
 			"gsd-core",
 			"https://raw.githubusercontent.com/open-gsd/gsd-core/main/registry.json",
 		),
+		&BuiltinRegistry{},
 	}
 
 	if localFile := os.Getenv("AGENTKIT_REGISTRY_FILE"); localFile != "" {

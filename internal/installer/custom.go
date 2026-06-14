@@ -1,9 +1,9 @@
 package installer
 
 import (
-	"bytes"
 	"errors"
 	"fmt"
+	"os"
 	"os/exec"
 
 	"github.com/ejyle/agentkit/internal/domain"
@@ -19,16 +19,17 @@ type CustomInstaller struct {
 	run runFunc
 }
 
-// NewCustomInstaller returns a CustomInstaller using the real exec.Command.
+// NewCustomInstaller returns a CustomInstaller that streams output directly to the terminal.
+// This supports interactive installers (e.g. npx @opengsd/gsd-core@latest) that prompt the user.
 func NewCustomInstaller() *CustomInstaller {
 	c := &CustomInstaller{}
 	c.run = func(name string, args []string) error {
 		cmd := exec.Command(name, args...)
-		var out bytes.Buffer
-		cmd.Stdout = &out
-		cmd.Stderr = &out
+		cmd.Stdin = os.Stdin
+		cmd.Stdout = os.Stdout
+		cmd.Stderr = os.Stderr
 		if err := cmd.Run(); err != nil {
-			return fmt.Errorf("custom install command exited non-zero: %w\noutput: %s", err, out.String())
+			return fmt.Errorf("custom install command exited non-zero: %w", err)
 		}
 		return nil
 	}
