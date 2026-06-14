@@ -86,7 +86,7 @@ printf 'Verifying checksum...\n'
 grep "${FILENAME}" "${TMPDIR}/checksums.txt" | (cd "${TMPDIR}" && ${SHA_CMD} --check -)
 
 # Extract binary (GoReleaser nests binary in agentkit_VERSION_OS_ARCH/agentkit)
-tar -xzf "${TMPDIR}/${FILENAME}" -C "${TMPDIR}" --strip-components=1 --wildcards "*/agentkit"
+tar -xzf "${TMPDIR}/${FILENAME}" -C "${TMPDIR}" agentkit
 
 # Install to user-local bin (no sudo required — CLI-10)
 INSTALL_DIR="${HOME}/.local/bin"
