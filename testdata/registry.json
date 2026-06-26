@@ -260,7 +260,7 @@
       "install": {
         "method": "npx",
         "package": "@azure-devops/mcp@latest",
-        "args": []
+        "args": ["--version"]
       },
       "mcp_entry": {
         "name": "azure-devops-mcp",
