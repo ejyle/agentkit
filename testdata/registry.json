@@ -265,7 +265,7 @@
       "mcp_entry": {
         "name": "azure-devops-mcp",
         "command": "npx",
-        "args": ["-y", "@azure-devops/mcp@latest"],
+        "args": ["-y", "@azure-devops/mcp@latest", "ejyle"],
         "env": {}
       },
       "sha256": ""
