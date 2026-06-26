@@ -123,8 +123,9 @@ func (s *InstallService) Install(name, target string) (*domain.Package, error) {
 		return nil, err
 	}
 
-	// Step 3: Populate SkillDir for github-release packages before calling Install.
-	if pkg.Install.Method == domain.InstallMethodGitHubRelease {
+	// Step 3: Populate SkillDir for filesystem-extraction install methods.
+	if pkg.Install.Method == domain.InstallMethodGitHubRelease ||
+		pkg.Install.Method == domain.InstallMethodGitHubDefaultBranch {
 		skillDir, err := config.SkillInstallPath(target, name)
 		if err != nil {
 			return nil, fmt.Errorf("resolving skill install path for %q: %w", name, err)
@@ -142,10 +143,11 @@ func (s *InstallService) Install(name, target string) (*domain.Package, error) {
 
 	// Step 4: Skill validation (non-blocking warnings, blocking errors).
 	if pkg.Type == domain.PackageTypeSkill {
-		// For github-release, validate the extracted directory.
+		// For filesystem-extraction methods, validate the extracted directory.
 		// For other methods (mock/unit tests), dir is empty — validator handles gracefully.
 		validationDir := ""
-		if pkg.Install.Method == domain.InstallMethodGitHubRelease {
+		if pkg.Install.Method == domain.InstallMethodGitHubRelease ||
+			pkg.Install.Method == domain.InstallMethodGitHubDefaultBranch {
 			validationDir = pkg.Install.SkillDir
 		}
 		result := s.validator(validationDir, pkg)
@@ -159,9 +161,10 @@ func (s *InstallService) Install(name, target string) (*domain.Package, error) {
 		}
 
 		// Step 6b for skills: call WriteSkill with SKILL.md bytes.
-		// For github-release, the installer already extracted all files — skip WriteSkill
-		// to avoid overwriting the extracted content.
-		if pkg.Install.Method != domain.InstallMethodGitHubRelease {
+		// For filesystem-extraction methods the installer already placed all files — skip
+		// WriteSkill to avoid overwriting the extracted content.
+		if pkg.Install.Method != domain.InstallMethodGitHubRelease &&
+			pkg.Install.Method != domain.InstallMethodGitHubDefaultBranch {
 			if err := s.adapter.WriteSkill(name, map[string][]byte{
 				"SKILL.md": []byte(""),
 			}); err != nil {

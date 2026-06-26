@@ -238,15 +238,80 @@
       "sha256": ""
     },
     {
-      "name": "azure-skills",
+      "name": "azure-ai",
       "version": "latest",
-      "description": "Official Microsoft Azure skill plugin — azure-prepare and azure-ai skills with bundled MCP config for Azure and Azure AI Foundry",
+      "description": "Official Microsoft Azure AI skill — Azure AI Foundry, OpenAI on Azure, AI Search, and model deployment patterns",
       "type": "skill",
       "source": "github.com/microsoft/azure-skills",
       "install": {
         "method": "github-default-branch",
         "repo": "microsoft/azure-skills",
-        "path": "."
+        "path": "skills/azure-ai"
+      },
+      "sha256": ""
+    },
+    {
+      "name": "azure-compute",
+      "version": "latest",
+      "description": "Official Microsoft Azure Compute skill — VMs, scale sets, AKS, Container Apps, and App Service management",
+      "type": "skill",
+      "source": "github.com/microsoft/azure-skills",
+      "install": {
+        "method": "github-default-branch",
+        "repo": "microsoft/azure-skills",
+        "path": "skills/azure-compute"
+      },
+      "sha256": ""
+    },
+    {
+      "name": "azure-storage",
+      "version": "latest",
+      "description": "Official Microsoft Azure Storage skill — Blob, Queue, Table, File shares, and Data Lake patterns",
+      "type": "skill",
+      "source": "github.com/microsoft/azure-skills",
+      "install": {
+        "method": "github-default-branch",
+        "repo": "microsoft/azure-skills",
+        "path": "skills/azure-storage"
+      },
+      "sha256": ""
+    },
+    {
+      "name": "azure-resource-lookup",
+      "version": "latest",
+      "description": "Official Microsoft Azure Resource Lookup skill — discover, query, and inspect Azure resources across subscriptions",
+      "type": "skill",
+      "source": "github.com/microsoft/azure-skills",
+      "install": {
+        "method": "github-default-branch",
+        "repo": "microsoft/azure-skills",
+        "path": "skills/azure-resource-lookup"
+      },
+      "sha256": ""
+    },
+    {
+      "name": "azure-compliance",
+      "version": "latest",
+      "description": "Official Microsoft Azure Compliance skill — Policy, Defender for Cloud, regulatory standards, and audit remediation",
+      "type": "skill",
+      "source": "github.com/microsoft/azure-skills",
+      "install": {
+        "method": "github-default-branch",
+        "repo": "microsoft/azure-skills",
+        "path": "skills/azure-compliance"
+      },
+      "sha256": ""
+    },
+    {
+      "name": "azure-cost",
+      "version": "latest",
+      "description": "Official Microsoft Azure Cost skill — cost analysis, budgets, reservations, and optimization recommendations",
+      "type": "skill",
+      "source": "github.com/microsoft/azure-skills",
+      "install": {
+        "method": "github-default-branch",
+        "repo": "microsoft/azure-skills",
+        "path": "skills/azure-cost"
       },
       "sha256": ""
     },
