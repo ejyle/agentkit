@@ -83,7 +83,11 @@
       "Bash(git -C /Users/nithin/Ejyle/coding-agent-utils/.claude/worktrees/agent-aa5305b52842d7aca ls-tree develop -- skills/)",
       "Bash(AGENTKIT_REGISTRY_FILE=/Users/nithin/Ejyle/coding-agent-utils/testdata/registry.json /tmp/agentkit-test search azure-skills)",
       "Bash(AGENTKIT_REGISTRY_FILE=/Users/nithin/Ejyle/coding-agent-utils/testdata/registry.json /tmp/agentkit-test install *)",
-      "Bash(AGENTKIT_REGISTRY_FILE=testdata/registry.json /tmp/agentkit-test install azure-mcp --target claude)"
+      "Bash(AGENTKIT_REGISTRY_FILE=testdata/registry.json /tmp/agentkit-test install azure-mcp --target claude)",
+      "Bash(AGENTKIT_REGISTRY_FILE=testdata/registry.json /tmp/agentkit-test install aws-mcp --target claude)",
+      "Bash(AGENTKIT_REGISTRY_FILE=testdata/registry.json /tmp/agentkit-test install gcloud-mcp --target claude)",
+      "Bash(AGENTKIT_REGISTRY_FILE=testdata/registry.json /tmp/agentkit-test install azure-devops-mcp --target claude)",
+      "Bash(python3 *)"
     ]
   }
 }

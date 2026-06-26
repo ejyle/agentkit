@@ -1,5 +1,5 @@
 ---
-name: skill-finder
+name: registry-curator
 description: >
   Use when you want to discover skills and MCP servers to add to the agentkit registry.
   Generates properly formatted registry entries (domain.Package JSON) ready to paste into
