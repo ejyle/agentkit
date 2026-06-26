@@ -15,7 +15,7 @@ stopped_at: Milestone complete (Phase 04 was final phase)
 
 # STATE: agentkit
 
-_Last updated: 2026-06-26 - Completed quick task 260626-jvc: Create skill-finder skill + deleted old bundled skills_
+_Last updated: 2026-06-26 - Completed quick task 260626-qna: Add Windows install script and update README_
 
 ---
 
@@ -117,6 +117,7 @@ None
 | # | Description | Date | Commit | Status | Directory |
 |---|-------------|------|--------|--------|-----------|
 | 260626-jvc | Create skill-finder skill that searches web for Claude Code skills and optionally installs them to project skill directory | 2026-06-26 | f75764b | Verified | [260626-jvc-create-skill-finder-skill-that-searches-](./quick/260626-jvc-create-skill-finder-skill-that-searches-/) |
+| 260626-qna | Add Windows install script to README — currently only Linux/macOS are covered | 2026-06-26 | 7ea5585 | Complete | [260626-qna-add-windows-install-script-to-readme-cur](./quick/260626-qna-add-windows-install-script-to-readme-cur/) |
 
 ---
 
