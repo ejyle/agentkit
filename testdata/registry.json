@@ -2,10 +2,10 @@
   "packages": [
     {
       "name": "playwright",
-      "version": "1.40.0",
+      "version": "latest",
       "description": "Playwright MCP server for browser automation — navigate pages, click elements, take screenshots, fill forms",
       "type": "mcp",
-      "source": "github.com/ejyle/agentkit-registry",
+      "source": "github.com/microsoft/playwright-mcp",
       "install": {
         "method": "npx",
         "package": "@playwright/mcp@latest",
@@ -14,8 +14,59 @@
       "mcp_entry": {
         "name": "playwright",
         "command": "npx",
-        "args": ["@playwright/mcp@latest"],
+        "args": ["-y", "@playwright/mcp@latest"],
         "env": {}
+      },
+      "sha256": ""
+    },
+    {
+      "name": "context-mode-mcp",
+      "version": "latest",
+      "description": "Context Mode MCP server — saves 98% context window via sandboxed code execution and FTS5/BM25 knowledge base; pair with context-mode-skills",
+      "type": "mcp",
+      "source": "github.com/mksglu/context-mode",
+      "install": {
+        "method": "npx",
+        "package": "context-mode@latest",
+        "args": ["--version"]
+      },
+      "mcp_entry": {
+        "name": "context-mode",
+        "command": "npx",
+        "args": ["-y", "context-mode@latest"],
+        "env": {}
+      },
+      "sha256": ""
+    },
+    {
+      "name": "context-mode-skills",
+      "version": "latest",
+      "description": "Context Mode skill collection — ctx routing rules, ctx-doctor, ctx-stats, ctx-upgrade; install alongside context-mode-mcp",
+      "type": "skill",
+      "source": "github.com/mksglu/context-mode",
+      "install": {
+        "method": "github-default-branch",
+        "repo": "mksglu/context-mode",
+        "path": "skills",
+        "multi_skill": true
+      },
+      "sha256": ""
+    },
+    {
+      "name": "github-mcp",
+      "version": "latest",
+      "description": "Official GitHub MCP server — manage repos, issues, PRs, code search, and GitHub Actions via GitHub REST and GraphQL APIs",
+      "type": "mcp",
+      "source": "github.com/github/github-mcp-server",
+      "install": {
+        "method": "docker",
+        "image": "ghcr.io/github/github-mcp-server"
+      },
+      "mcp_entry": {
+        "name": "github-mcp",
+        "command": "docker",
+        "args": ["run", "-i", "--rm", "-e", "GITHUB_PERSONAL_ACCESS_TOKEN", "ghcr.io/github/github-mcp-server"],
+        "env": { "GITHUB_PERSONAL_ACCESS_TOKEN": "" }
       },
       "sha256": ""
     },
