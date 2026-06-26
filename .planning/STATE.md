@@ -15,7 +15,7 @@ stopped_at: Milestone complete (Phase 04 was final phase)
 
 # STATE: agentkit
 
-_Last updated: 2026-06-09 (Phase 3 planned — 6 plans created, ready to execute)_
+_Last updated: 2026-06-26 - Completed quick task 260626-jvc: Create skill-finder skill + deleted old bundled skills_
 
 ---
 
@@ -111,6 +111,12 @@ Phase 4: Distribution        [----------]   0%
 ### Blockers
 
 None
+
+### Quick Tasks Completed
+
+| # | Description | Date | Commit | Status | Directory |
+|---|-------------|------|--------|--------|-----------|
+| 260626-jvc | Create skill-finder skill that searches web for Claude Code skills and optionally installs them to project skill directory | 2026-06-26 | f75764b | Verified | [260626-jvc-create-skill-finder-skill-that-searches-](./quick/260626-jvc-create-skill-finder-skill-that-searches-/) |
 
 ---
 
