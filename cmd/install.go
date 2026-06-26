@@ -42,6 +42,7 @@ Example:
 func init() {
 	rootCmd.AddCommand(installCmd)
 	installCmd.Flags().StringP("bundle", "b", "", "Install a preset bundle (cloud, dev, context)")
+	installCmd.Flags().Bool("all", false, "Install all available packages from all registries")
 }
 
 func runInstall(cmd *cobra.Command, args []string) error {
@@ -62,6 +63,11 @@ func runInstall(cmd *cobra.Command, args []string) error {
 		},
 	)
 
+	// --all flag: install every package from all registries.
+	if allFlag, _ := cmd.Flags().GetBool("all"); allFlag {
+		return runInstallAll(reg, target, svc)
+	}
+
 	// Dispatch to bundle install if --bundle flag is set.
 	bundleName, _ := cmd.Flags().GetString("bundle")
 	if bundleName != "" {
@@ -70,7 +76,7 @@ func runInstall(cmd *cobra.Command, args []string) error {
 
 	// Single-package install path.
 	if len(args) == 0 {
-		return fmt.Errorf("requires a package name or --bundle flag; run 'agentkit install --help'")
+		return fmt.Errorf("requires a package name, --bundle, or --all; run 'agentkit install --help'")
 	}
 	name := args[0]
 
@@ -122,7 +128,7 @@ func runInstall(cmd *cobra.Command, args []string) error {
 	return nil
 }
 
-// bundleResult holds the per-package outcome of a parallel bundle install.
+// bundleResult holds the per-package outcome of a parallel install.
 type bundleResult struct {
 	name string
 	pkg  *domain.Package
@@ -130,9 +136,6 @@ type bundleResult struct {
 }
 
 // runBundleInstall installs all packages in a named bundle in parallel.
-// Uses sync.WaitGroup (NOT errgroup) for best-effort semantics — all packages
-// are attempted regardless of individual failures (D-04).
-// Exits with code 1 if any package fails (D-05).
 func runBundleInstall(_ *cobra.Command, bundleName, target string, svc *service.InstallService) error {
 	manifest, err := bundle.LoadBundles()
 	if err != nil {
@@ -142,7 +145,31 @@ func runBundleInstall(_ *cobra.Command, bundleName, target string, svc *service.
 	if err != nil {
 		return err
 	}
+	return runParallelInstall(pkgNames, target, svc)
+}
 
+// runInstallAll installs every package available across all registries.
+func runInstallAll(reg *registry.RegistryManager, target string, svc *service.InstallService) error {
+	searchResults, err := reg.Search("")
+	if err != nil {
+		return fmt.Errorf("fetching registry: %w", err)
+	}
+	if len(searchResults) == 0 {
+		fmt.Println("No packages found in any registry.")
+		return nil
+	}
+	pkgNames := make([]string, len(searchResults))
+	for i, r := range searchResults {
+		pkgNames[i] = r.Package.Name
+	}
+	fmt.Printf("Installing %d packages...\n", len(pkgNames))
+	return runParallelInstall(pkgNames, target, svc)
+}
+
+// runParallelInstall installs a list of packages concurrently with best-effort semantics.
+// All packages are attempted regardless of individual failures (D-04).
+// Exits with code 1 if any package fails (D-05).
+func runParallelInstall(pkgNames []string, target string, svc *service.InstallService) error {
 	results := make([]bundleResult, len(pkgNames))
 	var wg sync.WaitGroup
 	for i, name := range pkgNames {
