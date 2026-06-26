@@ -18,12 +18,24 @@ Ships as a single cross-platform binary with no runtime dependency.
 
 **macOS / Linux (curl | sh):**
 ```bash
-curl -fsSL https://raw.githubusercontent.com/ejyle/agentkit/dev/scripts/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/ejyle/agentkit/main/scripts/install.sh | sh
 ```
+
+**Windows (PowerShell — no admin required):**
+```powershell
+irm https://raw.githubusercontent.com/ejyle/agentkit/main/scripts/install.ps1 | iex
+```
+Installs to `%LOCALAPPDATA%\Programs\agentkit` and adds it to your user PATH automatically.
 
 **Homebrew** *(coming soon)*:
 ```bash
 brew install ejyle/agentkit/agentkit
+```
+
+**Scoop** *(coming soon)*:
+```powershell
+scoop bucket add ejyle https://github.com/ejyle/scoop-agentkit
+scoop install agentkit
 ```
 
 **Go:**
