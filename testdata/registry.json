@@ -1,0 +1,182 @@
+{
+  "packages": [
+    {
+      "name": "playwright",
+      "version": "latest",
+      "description": "Playwright MCP server for browser automation — navigate pages, click elements, take screenshots, fill forms",
+      "type": "mcp",
+      "source": "github.com/microsoft/playwright-mcp",
+      "install": {
+        "method": "npx",
+        "package": "@playwright/mcp@latest",
+        "args": []
+      },
+      "mcp_entry": {
+        "name": "playwright",
+        "command": "npx",
+        "args": ["-y", "@playwright/mcp@latest"],
+        "env": {}
+      },
+      "sha256": ""
+    },
+    {
+      "name": "context-mode-mcp",
+      "version": "latest",
+      "description": "Context Mode MCP server — saves 98% context window via sandboxed code execution and FTS5/BM25 knowledge base; pair with context-mode-skills",
+      "type": "mcp",
+      "source": "github.com/mksglu/context-mode",
+      "install": {
+        "method": "npx",
+        "package": "context-mode@latest",
+        "args": ["--version"]
+      },
+      "mcp_entry": {
+        "name": "context-mode",
+        "command": "npx",
+        "args": ["-y", "context-mode@latest"],
+        "env": {}
+      },
+      "sha256": ""
+    },
+    {
+      "name": "context-mode-skills",
+      "version": "latest",
+      "description": "Context Mode skill collection — ctx routing rules, ctx-doctor, ctx-stats, ctx-upgrade; install alongside context-mode-mcp",
+      "type": "skill",
+      "source": "github.com/mksglu/context-mode",
+      "install": {
+        "method": "github-default-branch",
+        "repo": "mksglu/context-mode",
+        "path": "skills",
+        "multi_skill": true
+      },
+      "sha256": ""
+    },
+    {
+      "name": "github-mcp",
+      "version": "latest",
+      "description": "Official GitHub MCP server — manage repos, issues, PRs, code search, and GitHub Actions via GitHub REST and GraphQL APIs",
+      "type": "mcp",
+      "source": "github.com/github/github-mcp-server",
+      "install": {
+        "method": "docker",
+        "image": "ghcr.io/github/github-mcp-server"
+      },
+      "mcp_entry": {
+        "name": "github-mcp",
+        "command": "docker",
+        "args": ["run", "-i", "--rm", "-e", "GITHUB_PERSONAL_ACCESS_TOKEN", "ghcr.io/github/github-mcp-server"],
+        "env": { "GITHUB_PERSONAL_ACCESS_TOKEN": "" }
+      },
+      "sha256": ""
+    },
+    {
+      "name": "context7",
+      "version": "latest",
+      "description": "Context7 MCP server — fetch up-to-date library documentation directly into Claude Code context",
+      "type": "mcp",
+      "source": "github.com/upstash/context7",
+      "install": {
+        "method": "npx",
+        "package": "@upstash/context7-mcp@latest",
+        "args": []
+      },
+      "mcp_entry": {
+        "name": "context7",
+        "command": "npx",
+        "args": ["-y", "@upstash/context7-mcp@latest"],
+        "env": {}
+      },
+      "sha256": ""
+    },
+    {
+      "name": "aws-mcp",
+      "version": "latest",
+      "description": "Official AWS MCP server — full access to 15,000+ AWS API operations across all services (S3, EC2, Lambda, CloudFormation, and more)",
+      "type": "mcp",
+      "source": "github.com/awslabs/mcp",
+      "install": {
+        "method": "uvx",
+        "package": "awslabs.aws-api-mcp-server"
+      },
+      "mcp_entry": {
+        "name": "aws-mcp",
+        "command": "uvx",
+        "args": ["awslabs.aws-api-mcp-server@latest"],
+        "env": {}
+      },
+      "sha256": ""
+    },
+    {
+      "name": "azure-mcp",
+      "version": "latest",
+      "description": "Official Azure MCP server — 200+ tools across 40+ Azure services including Storage, Cosmos DB, Key Vault, and App Service",
+      "type": "mcp",
+      "source": "github.com/microsoft/mcp",
+      "install": {
+        "method": "npx",
+        "package": "@azure/mcp@latest",
+        "args": ["--version"]
+      },
+      "mcp_entry": {
+        "name": "azure-mcp",
+        "command": "npx",
+        "args": ["-y", "@azure/mcp@latest", "server", "start"],
+        "env": {}
+      },
+      "sha256": ""
+    },
+    {
+      "name": "gcloud-mcp",
+      "version": "latest",
+      "description": "Official Google Cloud MCP server — wraps gcloud CLI to manage GCP resources (Compute, GKE, Cloud Run, IAM, and more)",
+      "type": "mcp",
+      "source": "github.com/googleapis/gcloud-mcp",
+      "install": {
+        "method": "npx",
+        "package": "@google-cloud/gcloud-mcp",
+        "args": []
+      },
+      "mcp_entry": {
+        "name": "gcloud-mcp",
+        "command": "npx",
+        "args": ["-y", "@google-cloud/gcloud-mcp"],
+        "env": {}
+      },
+      "sha256": ""
+    },
+    {
+      "name": "azure-skills",
+      "version": "latest",
+      "description": "Official Microsoft Azure skills collection — installs all Azure skills (AI, compute, storage, compliance, cost, AKS, and more) from microsoft/azure-skills",
+      "type": "skill",
+      "source": "github.com/microsoft/azure-skills",
+      "install": {
+        "method": "github-default-branch",
+        "repo": "microsoft/azure-skills",
+        "path": "skills",
+        "multi_skill": true
+      },
+      "sha256": ""
+    },
+    {
+      "name": "azure-devops-mcp",
+      "version": "latest",
+      "description": "Official Azure DevOps MCP server — manage pipelines, repos, work items, boards, and releases via Azure DevOps REST API",
+      "type": "mcp",
+      "source": "github.com/microsoft/azure-devops-mcp",
+      "install": {
+        "method": "npx",
+        "package": "@azure-devops/mcp@latest",
+        "args": ["--version"]
+      },
+      "mcp_entry": {
+        "name": "azure-devops-mcp",
+        "command": "npx",
+        "args": ["-y", "@azure-devops/mcp@latest", "ejyle"],
+        "env": {}
+      },
+      "sha256": ""
+    }
+  ]
+}

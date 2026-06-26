@@ -1,0 +1,7 @@
+{
+  "bundles": {
+    "cloud":   { "packages": ["aws", "gcp", "azure"] },
+    "dev":     { "packages": ["playwright", "github", "cicd"] },
+    "context": { "packages": ["context-mode", "rtk", "serena"] }
+  }
+}

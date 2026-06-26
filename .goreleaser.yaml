@@ -1,0 +1,69 @@
+version: 2
+
+project_name: agentkit
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    ignore:
+      - goos: windows
+        goarch: arm64
+    main: .
+    ldflags:
+      - -s -w
+      - -X github.com/ejyle/agentkit/internal/version.Version={{.Version}}
+      - -X github.com/ejyle/agentkit/internal/version.GOOS={{.Os}}
+      - -X github.com/ejyle/agentkit/internal/version.GOARCH={{.Arch}}
+
+archives:
+  - format: tar.gz
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    format_overrides:
+      - goos: windows
+        format: zip
+
+checksum:
+  name_template: "checksums.txt"
+
+snapshot:
+  version_template: "{{ .Version }}-SNAPSHOT-{{ .ShortCommit }}"
+
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+      - "^chore:"
+
+signs:
+  - cmd: cosign
+    artifacts: checksum
+    args:
+      - sign-blob
+      - "--bundle=${signature}"
+      - "${artifact}"
+      - "--yes"
+
+brews:
+  - repository:
+      owner: ejyle
+      name: homebrew-agentkit
+      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
+    homepage: https://github.com/ejyle/agentkit
+    description: "AI agent skill and MCP server manager"
+    license: MIT
+    commit_author:
+      name: goreleaserbot
+      email: bot@goreleaser.com
