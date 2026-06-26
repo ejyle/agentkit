@@ -18,6 +18,11 @@ const (
 	InstallMethodDocker InstallMethod = "docker"
 	// InstallMethodGitHubRelease extracts a skill subdirectory from a GitHub release tarball.
 	InstallMethodGitHubRelease InstallMethod = "github-release"
+	// InstallMethodGitHubDefaultBranch fetches the default branch tarball of an external GitHub
+	// repo and extracts spec.Path into spec.SkillDir. Use "." for Path to extract the repo root.
+	// Unlike github-release, the URL is not tied to the agentkit binary version, so
+	// `agentkit update` always pulls the latest upstream content.
+	InstallMethodGitHubDefaultBranch InstallMethod = "github-default-branch"
 )
 
 // PackageType categorises what an agentkit package provides.

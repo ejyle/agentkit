@@ -22,6 +22,8 @@ var (
 	ErrDockerNotFound = errors.New("docker not found on PATH; install Docker: https://docs.docker.com/get-docker/")
 	// ErrGitHubReleaseNotFound is returned when the GitHub release tarball is not found (404).
 	ErrGitHubReleaseNotFound = errors.New("github-release: tarball not found; check version tag exists on GitHub")
+	// ErrGitHubDefaultBranchNotFound is returned when the default-branch tarball is not found (404).
+	ErrGitHubDefaultBranchNotFound = errors.New("github-default-branch: tarball not found; check the repo exists and is public")
 )
 
 // MCPInstaller is the interface for installing MCP server packages.
@@ -49,6 +51,8 @@ func NewInstaller(method domain.InstallMethod) (MCPInstaller, error) {
 		return NewDockerInstaller(), nil
 	case domain.InstallMethodGitHubRelease:
 		return NewGitHubReleaseInstaller(), nil
+	case domain.InstallMethodGitHubDefaultBranch:
+		return NewGitHubDefaultBranchInstaller(), nil
 	default:
 		return nil, fmt.Errorf("unsupported install method: %q", method)
 	}
