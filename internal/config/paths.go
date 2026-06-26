@@ -50,6 +50,16 @@ func TarballCachePath(repo, version string) (string, error) {
 
 // SkillInstallPath returns the install path for a named skill for a target assistant.
 // For claude: <UserHomeDir>/.claude/skills/<name>
+// SkillsBasePath returns the parent directory that contains all installed skills
+// for the given target assistant (e.g. ~/.claude/skills/).
+func SkillsBasePath(target string) (string, error) {
+	p, err := SkillInstallPath(target, "_placeholder")
+	if err != nil {
+		return "", err
+	}
+	return filepath.Dir(p), nil
+}
+
 func SkillInstallPath(target, name string) (string, error) {
 	home, err := os.UserHomeDir()
 	if err != nil {

@@ -43,10 +43,13 @@ type InstallSpec struct {
 	Package string        `json:"package,omitempty"`
 	URL     string        `json:"url,omitempty"`
 	Args    []string      `json:"args,omitempty"`
-	// Repo and Path are used by the github-release install method only.
+	// Repo and Path are used by github-release and github-default-branch methods.
 	// Example: Repo = "ejyle/agentkit", Path = "skills/aws"
 	Repo string `json:"repo,omitempty"`
 	Path string `json:"path,omitempty"`
+	// MultiSkill instructs the github-default-branch installer to extract each immediate
+	// subdirectory of Path as a separate skill. SkillDir is set to the skills base dir.
+	MultiSkill bool `json:"multi_skill,omitempty"`
 	// SkillDir is the resolved target directory, set at runtime by service.Install() — not serialised.
 	SkillDir string `json:"-"`
 }

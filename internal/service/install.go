@@ -126,11 +126,20 @@ func (s *InstallService) Install(name, target string) (*domain.Package, error) {
 	// Step 3: Populate SkillDir for filesystem-extraction install methods.
 	if pkg.Install.Method == domain.InstallMethodGitHubRelease ||
 		pkg.Install.Method == domain.InstallMethodGitHubDefaultBranch {
-		skillDir, err := config.SkillInstallPath(target, name)
-		if err != nil {
-			return nil, fmt.Errorf("resolving skill install path for %q: %w", name, err)
+		if pkg.Install.MultiSkill {
+			// Multi-skill: extract each subdir of Path into the skills base dir.
+			skillsBase, err := config.SkillsBasePath(target)
+			if err != nil {
+				return nil, fmt.Errorf("resolving skills base path for %q: %w", name, err)
+			}
+			pkg.Install.SkillDir = skillsBase
+		} else {
+			skillDir, err := config.SkillInstallPath(target, name)
+			if err != nil {
+				return nil, fmt.Errorf("resolving skill install path for %q: %w", name, err)
+			}
+			pkg.Install.SkillDir = skillDir
 		}
-		pkg.Install.SkillDir = skillDir
 	}
 
 	// Step 3a: Substitute $TARGET in Args for custom packages that are target-aware.
@@ -142,9 +151,10 @@ func (s *InstallService) Install(name, target string) (*domain.Package, error) {
 	}
 
 	// Step 4: Skill validation (non-blocking warnings, blocking errors).
-	if pkg.Type == domain.PackageTypeSkill {
+	if pkg.Type == domain.PackageTypeSkill && !pkg.Install.MultiSkill {
 		// For filesystem-extraction methods, validate the extracted directory.
 		// For other methods (mock/unit tests), dir is empty — validator handles gracefully.
+		// Multi-skill packages extract many subdirs — validation is skipped at the package level.
 		validationDir := ""
 		if pkg.Install.Method == domain.InstallMethodGitHubRelease ||
 			pkg.Install.Method == domain.InstallMethodGitHubDefaultBranch {

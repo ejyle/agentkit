@@ -66,13 +66,15 @@ func (n *NpxInstaller) Method() domain.InstallMethod {
 	return domain.InstallMethodNpx
 }
 
-// Install runs "npx -y <spec.Package>" using the arg-array form (never shell interpolation).
-// Returns ErrNodeNotFound if node is not on PATH.
+// Install runs "npx -y <spec.Package> [spec.Args...]" using the arg-array form (never shell
+// interpolation). spec.Args are install-time args (e.g. "--version" for packages that error
+// without a subcommand). Returns ErrNodeNotFound if node is not on PATH.
 func (n *NpxInstaller) Install(spec domain.InstallSpec) error {
 	if _, err := n.lookPath("node"); err != nil {
 		return ErrNodeNotFound
 	}
-	return n.run("npx", []string{"-y", spec.Package})
+	args := append([]string{"-y", spec.Package}, spec.Args...)
+	return n.run("npx", args)
 }
 
 // IsErrNodeNotFound reports whether err is (or wraps) ErrNodeNotFound.
