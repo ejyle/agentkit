@@ -73,26 +73,52 @@ Caches the remote registry manifests locally using ETag-based conditional reques
 
 Registry IDs: `agentkit-registry`, `gsd-core`.
 
+### Agent-Managed Binaries
+
+Binary packages installed via the `binary` or `github-release` methods are extracted to:
+
+| Platform | Path |
+|----------|------|
+| macOS | `~/Library/Application Support/agentkit/bin/` |
+| Linux | `~/.config/agentkit/bin/` |
+| Windows | `%APPDATA%\agentkit\bin\` |
+
+### GitHub Release Tarball Cache
+
+Tarballs downloaded during `github-release` installs are cached to avoid re-downloading on reinstall:
+
+| Platform | Path |
+|----------|------|
+| macOS | `~/Library/Caches/agentkit/releases/<repo-slug>/<version>/tarball.tar.gz` |
+| Linux | `~/.cache/agentkit/releases/<repo-slug>/<version>/tarball.tar.gz` |
+| Windows | `%LOCALAPPDATA%\agentkit\releases\<repo-slug>\<version>\tarball.tar.gz` |
+
 ## Skills and MCP Config Locations (Per Assistant)
 
 agentkit writes to these locations when installing packages. The paths are fixed per target assistant.
 
-| Target | Skills Path | MCP Config Path |
-|--------|-------------|-----------------|
-| `claude` | `~/.claude/skills/<name>/` | `~/.claude/settings.json` or `~/.claude.json` |
-| `gemini` | `~/.gemini/skills/<name>/` | `~/.gemini/settings.json` |
-| `pi` | `~/.agents/skills/<name>/` | `~/.pi/agent/mcp.json` |
-| `copilot-cli` | Not supported | `~/.copilot/mcp-config.json` (or `$COPILOT_HOME/mcp-config.json`) |
-| `copilot-vscode` | Not supported | <!-- VERIFY: copilot-vscode MCP config path --> |
-| `codex` | Not supported | `~/.codex/config.toml` |
-| `opencode` | Not supported | `~/.config/opencode/opencode.json` |
+| Target | Skills Path | MCP Config Path | MCP Config Key |
+|--------|-------------|-----------------|----------------|
+| `claude` | `~/.claude/skills/<name>/` | `~/.claude/settings.json` or `~/.claude.json` | `mcpServers` |
+| `gemini` | `~/.gemini/skills/<name>/` | `~/.gemini/settings.json` | `mcpServers` |
+| `pi` | `~/.agents/skills/<name>/` | `~/.pi/agent/mcp.json` | `mcpServers` |
+| `copilot-cli` | Not supported | `~/.copilot/mcp-config.json` (or `$COPILOT_HOME/mcp-config.json`) | `mcpServers` |
+| `copilot-vscode` | Not supported | `{UserConfigDir}/{edition}/User/mcp.json` (see note below) | `servers` |
+| `codex` | Not supported | `~/.codex/config.toml` | — |
+| `opencode` | Not supported | `~/.config/opencode/opencode.json` | — |
+
+**copilot-vscode MCP config path note:** agentkit detects the installed VS Code edition by checking for an existing `User/` directory under `{UserConfigDir}/Code`, then `{UserConfigDir}/Code - Insiders`, then `{UserConfigDir}/code-server`, in that order. If none is found, it defaults to `{UserConfigDir}/Code/User/mcp.json`. On macOS `UserConfigDir` is `~/Library/Application Support`; on Linux it is `~/.config`; on Windows it is `%APPDATA%`.
+
+**copilot-cli extra fields note:** Each MCP server entry written for `copilot-cli` includes `"type": "local"` and `"tools": ["*"]` fields required by the Copilot CLI MCP format.
 
 ## Registry Format
 
-Registries are GitHub repositories with a `registry.json` at the repo root. The two built-in registries are:
+Registries are GitHub repositories with a `registry.json` at the repo root. agentkit ships with three registries queried in priority order:
 
-- `agentkit-registry`: `https://raw.githubusercontent.com/ejyle/agentkit-registry/main/registry.json`
-- `gsd-core`: `https://raw.githubusercontent.com/open-gsd/gsd-core/main/registry.json`
+1. **Local override** (`local`) — active only when `AGENTKIT_REGISTRY_FILE` is set; queried first.
+2. **agentkit-registry** — `https://raw.githubusercontent.com/ejyle/agentkit-registry/main/registry.json`
+3. **gsd-core** — `https://raw.githubusercontent.com/open-gsd/gsd-core/main/registry.json`
+4. **builtin** — hardcoded packages that ship with agentkit regardless of external registries (currently includes `gsd`); queried last.
 
 **Manifest schema:**
 
@@ -121,6 +147,21 @@ Registries are GitHub repositories with a `registry.json` at the repo root. The 
   ]
 }
 ```
+
+For `github-release` and `github-default-branch` methods, the `install` object uses `repo` and `path` instead of `package`:
+
+```json
+{
+  "install": {
+    "method": "github-release",
+    "repo": "ejyle/agentkit",
+    "path": "skills/aws",
+    "multi_skill": false
+  }
+}
+```
+
+`multi_skill: true` instructs the installer to extract each immediate subdirectory of `path` as a separate skill.
 
 **Supported install methods:** `npx`, `uvx`, `docker`, `binary`, `github-release`, `github-default-branch`, `custom`.
 

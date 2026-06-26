@@ -130,4 +130,5 @@ go test ./...
 
 ## License
 
+<!-- VERIFY: license type — no LICENSE file found in repository root -->
 MIT

@@ -14,7 +14,8 @@ All tests are co-located with the packages they test under `internal/`, followin
 | `internal/adapter` | `claude_test.go`, `codex_test.go`, `copilot_cli_test.go`, `copilot_vscode_test.go`, `gemini_test.go`, `opencode_test.go`, `pi_test.go` |
 | `internal/bundle` | `bundles_test.go` |
 | `internal/config` | `store_test.go` |
-| `internal/installer` | `binary_test.go`, `custom_test.go`, `github_default_branch_test.go`, `uvx_test.go` |
+| `internal/domain` | `installed_test.go`, `package_test.go` |
+| `internal/installer` | `binary_test.go`, `custom_test.go`, `docker_test.go`, `github_default_branch_test.go`, `github_release_integration_test.go`, `github_release_test.go`, `npx_test.go`, `uvx_test.go` |
 | `internal/registry` | `github_test.go` |
 | `internal/service` | `install_test.go`, `search_test.go`, `uninstall_test.go`, `update_test.go` |
 | `internal/skill` | `validate_test.go` |

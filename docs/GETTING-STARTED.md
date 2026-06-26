@@ -38,7 +38,20 @@ irm https://raw.githubusercontent.com/ejyle/agentkit/main/scripts/install.ps1 | 
 
 Installs to `%LOCALAPPDATA%\Programs\agentkit` and adds it to your user PATH automatically.
 
-### Option 3: Go install
+### Option 3: Homebrew (coming soon)
+
+```bash
+brew install ejyle/agentkit/agentkit
+```
+
+### Option 4: Scoop — Windows (coming soon)
+
+```powershell
+scoop bucket add ejyle https://github.com/ejyle/scoop-agentkit
+scoop install agentkit
+```
+
+### Option 5: Go install
 
 ```bash
 go install github.com/ejyle/agentkit@latest
@@ -46,7 +59,7 @@ go install github.com/ejyle/agentkit@latest
 
 Installs the binary to `$(go env GOPATH)/bin/agentkit`.
 
-### Option 4: Build from source
+### Option 6: Build from source
 
 ```bash
 git clone https://github.com/ejyle/agentkit
@@ -124,3 +137,5 @@ agentkit installs to the assistant's standard config directory. The target assis
 
 - **[ARCHITECTURE.md](ARCHITECTURE.md)** — How agentkit is structured internally (registry, installer, adapter layers)
 - **[CONFIGURATION.md](CONFIGURATION.md)** — Environment variables, CLI flags, and state file locations
+- **[DEVELOPMENT.md](DEVELOPMENT.md)** — Local development setup, build commands, and PR process
+- **[TESTING.md](TESTING.md)** — Running the test suite and writing new tests

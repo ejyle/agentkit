@@ -55,19 +55,19 @@ This guide covers local setup, build commands, code style, branching, and the PR
 
 ### Snapshot Build (GoReleaser)
 
-To produce cross-platform binaries locally without publishing:
+To produce cross-platform binaries locally without publishing, install [GoReleaser](https://goreleaser.com/) and run:
 
 ```bash
 goreleaser release --snapshot --clean --skip=publish,sign,homebrew
 ```
 
-This requires [GoReleaser](https://goreleaser.com/) installed locally. Output lands in `dist/`.
+<!-- VERIFY: .goreleaser.yaml config file — not present in the repository at time of writing; add before enabling this workflow -->
 
 ## Code Style
 
 agentkit uses standard Go tooling for formatting and static analysis. There is no separate linter configuration file — the project relies on the Go standard tools.
 
-- **Formatting**: `go fmt ./...` — always run before committing. CI will flag unformatted files.
+- **Formatting**: `go fmt ./...` — always run before committing.
 - **Static analysis**: `go vet ./...` — run to catch common mistakes before opening a PR.
 - **Naming**: Follow standard Go conventions — exported identifiers use `PascalCase`, unexported use `camelCase`, package names are lowercase single words.
 - **Error handling**: Return typed errors at package boundaries; do not use `panic` for recoverable conditions.
@@ -81,7 +81,7 @@ No branch naming convention is formally documented. The following pattern is use
 
 | Branch | Purpose |
 |--------|---------|
-| `main` | Stable — CI runs a GoReleaser snapshot build on every push |
+| `main` | Stable releases |
 | `develop` | Integration branch for active development |
 | `feat/<description>` | New features |
 | `fix/<description>` | Bug fixes |
@@ -97,9 +97,8 @@ No formal pull request template is present. Follow these guidelines when opening
 - **Scope**: Keep each PR focused on a single concern. Avoid combining feature work with refactors.
 - **Tests**: Add or update `*_test.go` files for any changed behaviour. Run `go test ./...` locally before pushing.
 - **Formatting**: Ensure `go fmt ./...` and `go vet ./...` pass with no output.
-- **Commit messages**: Use conventional commit prefixes — `feat:`, `fix:`, `docs:`, `chore:`, `test:`. The GoReleaser changelog filters out `docs:`, `test:`, and `chore:` entries from release notes automatically.
+- **Commit messages**: Use conventional commit prefixes — `feat:`, `fix:`, `docs:`, `chore:`, `test:`.
 - **Description**: Summarise *what* changed and *why*. Reference any related issue numbers.
-- **CI**: The `release.yml` workflow runs on tag pushes (full release) and `main` pushes (snapshot). Verify the snapshot job passes after your PR merges.
 
 ## Project Layout Reference
 
@@ -108,9 +107,9 @@ agentkit/
 ├── main.go                  # Entry point — delegates to cmd.Execute()
 ├── cmd/                     # Cobra command definitions (install, uninstall, list, search, update, doctor)
 ├── internal/
-│   ├── adapter/             # Per-assistant config writers (Claude, Copilot, Codex, Gemini, OpenCode, Pi)
+│   ├── adapter/             # Per-assistant config writers (Claude, Copilot, Codex, Gemini, OpenCode)
 │   ├── bundle/              # Preset package groups (--bundle flag)
-│   ├── config/              # Config store and XDG/platform path resolution
+│   ├── config/              # Config store and platform path resolution
 │   ├── domain/              # Core domain types
 │   ├── fileutil/            # Atomic file write helpers
 │   ├── installer/           # MCP install strategies (npx, uvx, binary, Docker, GitHub release)
@@ -122,11 +121,8 @@ agentkit/
 ├── scripts/
 │   ├── install.sh           # macOS/Linux install script
 │   └── install.ps1          # Windows PowerShell install script
-├── testdata/
-│   └── registry.json        # Test fixture registry
-├── .goreleaser.yaml         # Cross-platform release config
-└── .github/workflows/
-    └── release.yml          # CI: tag → full release; main push → snapshot
+└── testdata/
+    └── registry.json        # Test fixture registry
 ```
 
 See [ARCHITECTURE.md](ARCHITECTURE.md) for component diagrams and data flow details.
