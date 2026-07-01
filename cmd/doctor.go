@@ -203,6 +203,11 @@ func checkAssistantDirs() []CheckResult {
 			descName: "Codex",
 		},
 		{
+			dirLabel: "~/.cursor/",
+			path:     filepath.Join(home, ".cursor"),
+			descName: "Cursor",
+		},
+		{
 			dirLabel: "~/.config/opencode/",
 			path:     filepath.Join(home, ".config", "opencode"),
 			descName: "OpenCode",
