@@ -3,14 +3,14 @@
 
 > Zero-friction install of the right skills, agents, and MCP servers for any AI coding assistant.
 
-**agentkit** is a production-grade CLI for discovering, installing, updating, and managing AI agent skills, MCP servers, and coding agents across all major AI coding assistants — Claude Code, GitHub Copilot, OpenAI Codex, Gemini CLI, and OpenCode.
+**agentkit** is a production-grade CLI for discovering, installing, updating, and managing AI agent skills, MCP servers, and coding agents across all major AI coding assistants — Claude Code, GitHub Copilot, OpenAI Codex, Gemini CLI, OpenCode, and Cursor.
 
 Ships as a single cross-platform binary with no runtime dependency.
 
 ## Features
 
 - Install skills, MCP servers, and agents from multiple registries
-- Supports Claude Code, GitHub Copilot (CLI + VS Code), Codex, Gemini CLI, OpenCode
+- Supports Claude Code, GitHub Copilot (CLI + VS Code), Codex, Gemini CLI, OpenCode, Cursor
 - Single binary — no runtime dependency, no Node/Python required
 - `agentkit doctor` — environment health checks with pass/warn/fail output
 - Registry-driven — pull from GitHub manifest registries or custom sources
@@ -82,7 +82,7 @@ agentkit install --bundle dev
 agentkit install --all
 ```
 
-Supported targets: `claude`, `copilot-cli`, `copilot-vscode`, `codex`, `gemini`, `opencode`, `pi`
+Supported targets: `claude`, `copilot-cli`, `copilot-vscode`, `codex`, `gemini`, `opencode`, `pi`, `cursor`
 
 ### Search the registry
 

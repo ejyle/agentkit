@@ -2,20 +2,19 @@
 gsd_state_version: 1.0
 milestone: v0.1.0
 milestone_name: milestone
-status: milestone_complete
-last_updated: 2026-06-13T06:49:57.503Z
+status: completed
+last_updated: "2026-07-02T05:35:12.003Z"
 progress:
   total_phases: 4
   completed_phases: 4
   total_plans: 23
   completed_plans: 23
   percent: 100
-stopped_at: Milestone complete (Phase 04 was final phase)
 ---
 
 # STATE: agentkit
 
-_Last updated: 2026-06-26 - Completed quick task 260626-qna: Add Windows install script and update README_
+_Last updated: 2026-07-01 - Completed quick task 260701-hsh: Add support for Cursor AI as well_
 
 ---
 
@@ -118,6 +117,7 @@ None
 |---|-------------|------|--------|--------|-----------|
 | 260626-jvc | Create skill-finder skill that searches web for Claude Code skills and optionally installs them to project skill directory | 2026-06-26 | f75764b | Verified | [260626-jvc-create-skill-finder-skill-that-searches-](./quick/260626-jvc-create-skill-finder-skill-that-searches-/) |
 | 260626-qna | Add Windows install script to README — currently only Linux/macOS are covered | 2026-06-26 | 7ea5585 | Complete | [260626-qna-add-windows-install-script-to-readme-cur](./quick/260626-qna-add-windows-install-script-to-readme-cur/) |
+| 260701-hsh | Add support for Cursor AI as well — CursorAdapter (MCP config + skills), wired into factory/CLI/doctor/README | 2026-07-01 | 479b8dd | Verified | [260701-hsh-add-support-for-cursor-ai-as-well](./quick/260701-hsh-add-support-for-cursor-ai-as-well/) |
 
 ---
 

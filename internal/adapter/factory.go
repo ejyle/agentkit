@@ -8,7 +8,7 @@ import (
 
 // NewAdapter returns the AssistantAdapter for the given target assistant name.
 //
-// Supported targets: claude, copilot-cli, copilot-vscode, gemini, pi, codex, opencode.
+// Supported targets: claude, copilot-cli, copilot-vscode, gemini, pi, codex, opencode, cursor.
 //
 // Note: cmd/root.go validates the --target flag before this function is called;
 // the default case is a defense-in-depth guard for programmatic callers.
@@ -28,7 +28,9 @@ func NewAdapter(target string, store *config.ConfigStore) (AssistantAdapter, err
 		return NewCodexAdapter(store), nil
 	case "opencode":
 		return NewOpenCodeAdapter(store), nil
+	case "cursor":
+		return NewCursorAdapter(store), nil
 	default:
-		return nil, fmt.Errorf("unsupported target assistant: %q (valid targets: claude, copilot-cli, copilot-vscode, gemini, pi, codex, opencode)", target)
+		return nil, fmt.Errorf("unsupported target assistant: %q (valid targets: claude, copilot-cli, copilot-vscode, gemini, pi, codex, opencode, cursor)", target)
 	}
 }
