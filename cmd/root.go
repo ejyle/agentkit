@@ -8,9 +8,9 @@ import (
 )
 
 var rootCmd = &cobra.Command{
-	Use:     "agentkit",
-	Short:   "AI agent skill and MCP server manager",
-	Long:    `agentkit installs, updates, and manages AI agent skills, MCP servers, and
+	Use:   "agentkit",
+	Short: "AI agent skill and MCP server manager",
+	Long: `agentkit installs, updates, and manages AI agent skills, MCP servers, and
 coding agents across all major AI coding assistants.`,
 	Version: version.String(),
 }

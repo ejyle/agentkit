@@ -169,8 +169,8 @@ func checkAssistantDirs() []CheckResult {
 	home, err := os.UserHomeDir()
 	if err != nil {
 		return []CheckResult{{
-			Label:  "assistant dirs",
-			Status: "fail",
+			Label:   "assistant dirs",
+			Status:  "fail",
 			Message: err.Error(),
 		}}
 	}
@@ -235,11 +235,11 @@ func checkAssistantDirs() []CheckResult {
 // checkRuntimeDeps checks for optional runtime dependencies (node, docker, uvx).
 func checkRuntimeDeps() []CheckResult {
 	type dep struct {
-		binary   string
+		binary    string
 		passLabel string
 		failLabel string
-		failMsg  string
-		hint     string
+		failMsg   string
+		hint      string
 	}
 
 	deps := []dep{
